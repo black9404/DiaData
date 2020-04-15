@@ -2,7 +2,11 @@ package com.example.android.diadata;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import com.example.android.diadata.ui.Dashboard;
+import com.example.android.diadata.ui.UserDataForm;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -10,5 +14,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE);
+        boolean userDataAdded = sharedPreferences.getBoolean("userDataAdded", false);
+
+        if (userDataAdded) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new UserDataForm()).commit();
+        }
+
+        else {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Dashboard()).commit();
+        }
+
     }
 }
