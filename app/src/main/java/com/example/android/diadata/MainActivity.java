@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE);
         boolean userDataAdded = sharedPreferences.getBoolean("userDataAdded", false);
 
-        if (userDataAdded) {
+        if (!userDataAdded) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new UserDataForm()).commit();
         }
 
