@@ -10,4 +10,5 @@
     <string name="idade_form">idade</string>
     <string name="botao_submeter">Submeter</string>
     <string name="disclaimer_utilizadores">Concordo com o facto de a presente aplicação não ser uma ferramenta médica precisa, sendo o seu propósito ser um auxiliar para os seus utilzadores.</string>
+    <string name="welcome_sentence_user">Bem-vindo, %s</string>
 </resources>
