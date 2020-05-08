@@ -1,13 +1,11 @@
 package com.example.android.diadata.ui;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +14,6 @@ import android.widget.TextView;
 import com.example.android.diadata.R;
 
 import java.util.Objects;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class Dashboard extends Fragment {
 
@@ -32,6 +28,7 @@ public class Dashboard extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews();
+        fetchData();
     }
 
     //metodo que instancia todos os elementos presentes no layout
@@ -42,14 +39,8 @@ public class Dashboard extends Fragment {
     //metodo que preenche as informações armazenadas
     private void fetchData() {
 
-        //inicializado as SharedPreferences de forma a obter a informação armazenada
-        SharedPreferences sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences("prefs", MODE_PRIVATE);
-
-        //isolado o nome do utilizador da String que esta armazenada nas SharedPreferences
-
-
         //insere o nome do utilizador
-        userNameTextView.setText(String.format(getResources().getString(R.string.welcome_sentence_user), sharedPreferences.getString()));;
+        userNameTextView.setText(String.format(getResources().getString(R.string.welcome_sentence_user), UserInformation.getName()));
 
 
     }

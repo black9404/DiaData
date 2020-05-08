@@ -15,14 +15,15 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.android.diadata.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-
 public class UserDataForm extends Fragment {
 
     private EditText userNameEditText, userForenameEditText, userAgeEditText;
+    private ArrayList<String> userInformation = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class UserDataForm extends Fragment {
                 redirectToDashboard(checkIfDataIsValid());
             }
         });
+
     }
 
     //metodo que verifica se os dados inseridos no formulário são válidos
@@ -67,13 +69,14 @@ public class UserDataForm extends Fragment {
 
             //caso os valor inserido seja válido o mesmo é adicionada à String userInformation
             else {
-                String userInformation = edit.getText().toString();
-                UserInformation.storeUserData(userInformation);
+                String retrievedInformation = edit.getText().toString();
+                userInformation.add(retrievedInformation);
             }
 
         }
 
-        //se os valores inseridos forem válidos
+        //retorna os valores através de um array se os valores inseridos forem válidos
+        UserInformation.storeUserData(userInformation, Objects.requireNonNull(getContext()));
         return true;
     }
 
@@ -82,6 +85,9 @@ public class UserDataForm extends Fragment {
 
         //atualiza os valores das SharedPreferences para que o formulário não volte a aparecer
         if (dataIsValid) {
+
+            //define o formulário como preenhido pelo utilizador
+            UserInformation.formFilled(Objects.requireNonNull(getContext()));
 
             //redireciona o utilizador para o dashboard
             Fragment dashboard = new Dashboard();
