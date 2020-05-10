@@ -1,5 +1,7 @@
 package com.example.android.diadata.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -14,12 +16,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.android.diadata.R;
-import com.example.android.diadata.core.DataProcessing;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class UserDataForm extends Fragment {
 
@@ -99,6 +102,14 @@ public class UserDataForm extends Fragment {
 
         }
 
+    }
+
+    //metodo que atualiza as SharedPreferences caso o formulário se encontre preenchido
+    static void formFilled(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("userDataAdded", true);
+        editor.apply();
     }
 
 }
