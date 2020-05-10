@@ -18,19 +18,27 @@ public class Meal {
     int hidratos;
     @ColumnInfo(name = "nome_meal")
     String nome;
+    @ColumnInfo(name = "dia_meal")
+    int dia;
+    @ColumnInfo(name = "mes_meal")
+    int mes;
 
-    public Meal(int id_meal, int id_user, int hidratos, String nome) {
+    public Meal(int id_meal, int id_user, int hidratos, String nome, int d, int m) {
         this.id_meal = id_meal;
         this.id_user = id_user;
         this.hidratos = hidratos;
         this.nome = nome;
+        this.dia = d;
+        this.mes = m;
     }
 
     @Ignore
-    public Meal(int id_user, int hidratos, String nome) {
+    public Meal(int id_user, int hidratos, String nome, int d, int m) {
         this.id_user = id_user;
         this.hidratos = hidratos;
         this.nome = nome;
+        this.dia = d;
+        this.mes = m;
     }
 
 }
