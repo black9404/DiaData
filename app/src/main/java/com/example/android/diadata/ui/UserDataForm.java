@@ -1,6 +1,5 @@
 package com.example.android.diadata.ui;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,7 +26,6 @@ import static android.content.Context.MODE_PRIVATE;
 public class UserDataForm extends Fragment {
 
     private EditText userNameEditText, userForenameEditText, userAgeEditText;
-    private ArrayList<String> userInformation = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,10 +51,10 @@ public class UserDataForm extends Fragment {
                 redirectToDashboard(checkIfDataIsValid());
             }
         });
-
     }
 
     //metodo que verifica se os dados inseridos no formulário são válidos
+    //TODO: Alterar o método para armazenar os dados do formulário na base de dados
     private boolean checkIfDataIsValid() {
 
         //lista de todos os campos presentes no formulário
@@ -74,24 +72,21 @@ public class UserDataForm extends Fragment {
             //caso os valor inserido seja válido o mesmo é adicionada à String userInformation
             else {
                 String retrievedInformation = edit.getText().toString();
-                userInformation.add(retrievedInformation);
             }
 
         }
 
-        //retorna os valores através de um array se os valores inseridos forem válidos
-        DataProcessing.storeUserData(userInformation, Objects.requireNonNull(getContext()));
         return true;
     }
 
-    //metodo que atualiza as SharedPreferences caso os dados inseridos sejam válidos
+    //metodo que redireciona o utilizador para o Dashboard
     private void redirectToDashboard(boolean dataIsValid) {
 
         //atualiza os valores das SharedPreferences para que o formulário não volte a aparecer
         if (dataIsValid) {
 
             //define o formulário como preenhido pelo utilizador
-            DataProcessing.formFilled(Objects.requireNonNull(getContext()));
+            formFilled();
 
             //redireciona o utilizador para o dashboard
             Fragment dashboard = new Dashboard();
@@ -105,8 +100,8 @@ public class UserDataForm extends Fragment {
     }
 
     //metodo que atualiza as SharedPreferences caso o formulário se encontre preenchido
-    static void formFilled(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("prefs", MODE_PRIVATE);
+    private void formFilled() {
+        SharedPreferences sharedPreferences = Objects.requireNonNull(getContext()).getSharedPreferences("prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("userDataAdded", true);
         editor.apply();

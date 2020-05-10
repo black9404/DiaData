@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.android.diadata.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
 
 public class Dashboard extends Fragment {
 
     private TextView userNameTextView;
+    private FloatingActionButton addFloatingActionButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +36,13 @@ public class Dashboard extends Fragment {
     //metodo que instancia todos os elementos presentes no layout
     private void initViews() {
         userNameTextView = Objects.requireNonNull(getView()).findViewById(R.id.username);
+        addFloatingActionButton = getView().findViewById(R.id.fab);
+        addFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addData();
+            }
+        });
     }
 
     //metodo que preenche as informações armazenadas
@@ -42,6 +51,11 @@ public class Dashboard extends Fragment {
         //insere o nome do utilizador
         //userNameTextView.setText(String.format(getResources().getString(R.string.welcome_sentence_user), ));
 
+
+    }
+
+    //metodo que adiciona um alimento/refeição
+    private void addData() {
 
     }
 
