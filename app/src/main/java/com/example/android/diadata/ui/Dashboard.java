@@ -36,13 +36,13 @@ public class Dashboard extends Fragment {
     //metodo que instancia todos os elementos presentes no layout
     private void initViews() {
         userNameTextView = Objects.requireNonNull(getView()).findViewById(R.id.username);
-        addFloatingActionButton = getView().findViewById(R.id.fab);
-        addFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+        //addFloatingActionButton = getView().findViewById(R.id.fab);
+        /*addFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addData();
             }
-        });
+        });*/
     }
 
     //metodo que preenche as informações armazenadas
