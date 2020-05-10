@@ -6,23 +6,23 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.android.diadata.db.model.Food;
+import com.example.android.diadata.db.model.Meal;
 
 import java.util.List;
 
 @Dao
-public interface FoodDao {
+public interface MealDao {
 
-    @Query("Select * from food")
-    List<Food> getAlimentos();
+    @Query("Select * from meal")
+    List<Meal> getRefeicoes();
 
     @Insert
-    void addAlimento(Food food);
+    void addRefeicao(Meal meal);
 
     @Update
-    void updateAlimento(Food food);
+    void updateRefeicao(Meal meal);
 
     @Delete
-    void deleteAlimento(Food food);
+    void deleteRemoveRefeicao(Meal meal);
 
 }
