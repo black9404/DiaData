@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.android.diadata.R;
+import com.example.android.diadata.core.DataProcessing;
 
 import java.util.Objects;
 
@@ -40,7 +41,7 @@ public class Dashboard extends Fragment {
     private void fetchData() {
 
         //insere o nome do utilizador
-        userNameTextView.setText(String.format(getResources().getString(R.string.welcome_sentence_user), UserInformation.getName()));
+        userNameTextView.setText(String.format(getResources().getString(R.string.welcome_sentence_user), DataProcessing.getName()));
 
 
     }

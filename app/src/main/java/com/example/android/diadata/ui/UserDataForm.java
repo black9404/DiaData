@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.android.diadata.R;
+import com.example.android.diadata.core.DataProcessing;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,7 +77,7 @@ public class UserDataForm extends Fragment {
         }
 
         //retorna os valores através de um array se os valores inseridos forem válidos
-        UserInformation.storeUserData(userInformation, Objects.requireNonNull(getContext()));
+        DataProcessing.storeUserData(userInformation, Objects.requireNonNull(getContext()));
         return true;
     }
 
@@ -87,7 +88,7 @@ public class UserDataForm extends Fragment {
         if (dataIsValid) {
 
             //define o formulário como preenhido pelo utilizador
-            UserInformation.formFilled(Objects.requireNonNull(getContext()));
+            DataProcessing.formFilled(Objects.requireNonNull(getContext()));
 
             //redireciona o utilizador para o dashboard
             Fragment dashboard = new Dashboard();

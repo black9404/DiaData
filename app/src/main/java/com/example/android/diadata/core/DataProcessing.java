@@ -1,4 +1,4 @@
-package com.example.android.diadata.ui;
+package com.example.android.diadata.core;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class UserInformation {
+public class DataProcessing {
 
     private static String name, forename;
-    private int age;
+    private static int age;
 
     static void storeUserData(ArrayList<String> userInformation, Context context) {
 
@@ -33,23 +33,23 @@ public class UserInformation {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public static void setName(String name) {
+        DataProcessing.name = name;
     }
 
-    public String getForename() {
+    public static String getForename() {
         return forename;
     }
 
-    public void setForename(String forename) {
-        this.forename = forename;
+    public static void setForename(String forename) {
+        DataProcessing.forename = forename;
     }
 
-    public int getAge() {
+    public static int getAge() {
         return age;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public static void setAge(int age) {
+        DataProcessing.age = age;
     }
 }
