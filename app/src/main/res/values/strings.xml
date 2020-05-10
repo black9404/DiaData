@@ -1,14 +1,27 @@
 <resources>
+
     <string name="app_name">DiaData</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Fragmento formulário -->
     <string name="bem_vindo">Bem-vindo!</string>
     <string name="frase_sob_bem_vindo">Preencha o seguinte formulário para podermos conhecer mais um bocado de si!</string>
-    <string name="nome_form">Nome</string>
+
+    <!-- Formulário -->
+    <string name="nome_form">nome</string>
     <string name="apelido_form">apelido</string>
     <string name="idade_form">idade</string>
+    <string name="genero_form">gênero</string>
     <string name="botao_submeter">Submeter</string>
     <string name="disclaimer_utilizadores">Concordo com o facto de a presente aplicação não ser uma ferramenta médica precisa, sendo o seu propósito ser um auxiliar para os seus utilzadores.</string>
+
+    <!-- Lista de gêneros -->
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+
+    <!-- Fragmento dashboard -->
     <string name="welcome_sentence_user">Bem-vindo, %s</string>
+
 </resources>

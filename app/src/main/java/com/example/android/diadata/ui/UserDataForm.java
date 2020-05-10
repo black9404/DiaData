@@ -6,8 +6,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +28,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class UserDataForm extends Fragment {
 
     private EditText userNameEditText, userForenameEditText, userAgeEditText;
+    private Spinner genderSpinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +46,11 @@ public class UserDataForm extends Fragment {
         userNameEditText = Objects.requireNonNull(getView()).findViewById(R.id.userNameForm);
         userForenameEditText = Objects.requireNonNull(getView()).findViewById(R.id.userForenameForm);
         userAgeEditText = Objects.requireNonNull(getView()).findViewById(R.id.userAgeForm);
+
+        genderSpinner = Objects.requireNonNull(getView()).findViewById(R.id.gender_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getContext()), R.array.gender, android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genderSpinner.setAdapter(adapter);
 
         Button submitFormButton = Objects.requireNonNull(getView()).findViewById(R.id.button);
         submitFormButton.setOnClickListener(new View.OnClickListener() {
