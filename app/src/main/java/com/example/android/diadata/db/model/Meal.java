@@ -2,43 +2,30 @@ package com.example.android.diadata.db.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "meal",
-        primaryKeys = {"id_meal"}, foreignKeys = {@ForeignKey(entity = User.class, parentColumns = "id", childColumns = "id_user")})
+@Entity(tableName = "meal")
 public class Meal {
 
     @PrimaryKey(autoGenerate = true)
-    int id_meal;
+    public int id_meal;
     @ColumnInfo(name = "id_user")
-    int id_user;
+    public int id_user;
     @ColumnInfo(name = "qnt_hidratos")
-    int hidratos;
+    public int hidratos;
     @ColumnInfo(name = "nome_meal")
-    String nome;
+    public String nome;
     @ColumnInfo(name = "dia_meal")
-    int dia;
+    public int dia;
     @ColumnInfo(name = "mes_meal")
-    int mes;
+    public int mes;
 
-    public Meal(int id_meal, int id_user, int hidratos, String nome, int d, int m) {
+    public Meal(int id_meal, int id_user, int hidratos, String nome, int dia, int mes) {
         this.id_meal = id_meal;
         this.id_user = id_user;
         this.hidratos = hidratos;
         this.nome = nome;
-        this.dia = d;
-        this.mes = m;
+        this.dia = dia;
+        this.mes = mes;
     }
-
-    @Ignore
-    public Meal(int id_user, int hidratos, String nome, int d, int m) {
-        this.id_user = id_user;
-        this.hidratos = hidratos;
-        this.nome = nome;
-        this.dia = d;
-        this.mes = m;
-    }
-
 }
