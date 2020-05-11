@@ -17,8 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.android.diadata.R;
+//import com.example.android.diadata.db.dao.UserDao;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -79,10 +79,33 @@ public class UserDataForm extends Fragment {
 
             //caso os valor inserido seja válido o mesmo é adicionada à String userInformation
             else {
+
+                //verifica qual dos campos foi preenchido
+                switch (editTextList.indexOf(edit)) {
+
+                    //campo do nome
+                    case 0:
+
+                        break;
+
+                    //campo do subnome
+                    case 1:
+                        break;
+
+                    //campo da idade
+                    case 2:
+                        break;
+
+                }
+
+
                 String retrievedInformation = edit.getText().toString();
             }
 
         }
+
+        //verifica se o utilizador selecionou um gênero
+        //if (genderSpinner)
 
         return true;
     }
