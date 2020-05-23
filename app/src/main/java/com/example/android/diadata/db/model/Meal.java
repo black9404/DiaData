@@ -8,17 +8,17 @@ import androidx.room.PrimaryKey;
 public class Meal {
 
     @PrimaryKey(autoGenerate = true)
-    public int id_meal;
+    private int id_meal;
     @ColumnInfo(name = "id_user")
-    public int id_user;
+    private int id_user;
     @ColumnInfo(name = "qnt_hidratos")
-    public int hidratos;
+    private int hidratos;
     @ColumnInfo(name = "nome_meal")
-    public String nome;
+    private String nome;
     @ColumnInfo(name = "dia_meal")
-    public int dia;
+    private int dia;
     @ColumnInfo(name = "mes_meal")
-    public int mes;
+    private int mes;
 
     public Meal(int id_meal, int id_user, int hidratos, String nome, int dia, int mes) {
         this.id_meal = id_meal;
@@ -26,6 +26,54 @@ public class Meal {
         this.hidratos = hidratos;
         this.nome = nome;
         this.dia = dia;
+        this.mes = mes;
+    }
+
+    public int getId_meal() {
+        return id_meal;
+    }
+
+    public void setId_meal(int id_meal) {
+        this.id_meal = id_meal;
+    }
+
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+
+    public int getHidratos() {
+        return hidratos;
+    }
+
+    public void setHidratos(int hidratos) {
+        this.hidratos = hidratos;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getDia() {
+        return dia;
+    }
+
+    public void setDia(int dia) {
+        this.dia = dia;
+    }
+
+    public int getMes() {
+        return mes;
+    }
+
+    public void setMes(int mes) {
         this.mes = mes;
     }
 }
