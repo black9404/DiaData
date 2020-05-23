@@ -13,8 +13,8 @@ import java.util.List;
 @Dao
 public interface FoodDao {
 
-    @Query("Select nome from food")
-    List<Food> getAlimentos();
+    /*@Query("Select nome from food")
+    List<Food> getAlimentos();*/
 
     @Insert
     void addAlimento(Food food);

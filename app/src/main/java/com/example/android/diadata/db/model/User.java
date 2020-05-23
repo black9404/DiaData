@@ -16,12 +16,11 @@ public class User {
     @ColumnInfo(name = "idade")
     private int idade;
     @ColumnInfo(name = "tipo_diabetes")
-    private boolean tipo_diabetes;
+    private int tipo_diabetes;
     @ColumnInfo(name = "genero")
     private String genero;
 
-    public User(int id, String nome, String subnome, int idade, boolean tipo_diabetes, String genero) {
-        this.id = id;
+    public User(String nome, String subnome, int idade, int tipo_diabetes, String genero) {
         this.nome = nome;
         this.subnome = subnome;
         this.idade = idade;
@@ -61,11 +60,11 @@ public class User {
         this.idade = idade;
     }
 
-    public boolean isTipo_diabetes() {
+    public int getTipo_diabetes() {
         return tipo_diabetes;
     }
 
-    public void setTipo_diabetes(boolean tipo_diabetes) {
+    public void setTipo_diabetes(int tipo_diabetes) {
         this.tipo_diabetes = tipo_diabetes;
     }
 

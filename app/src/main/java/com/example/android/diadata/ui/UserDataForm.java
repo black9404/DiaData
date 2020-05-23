@@ -16,8 +16,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.android.diadata.MainActivity;
 import com.example.android.diadata.R;
-//import com.example.android.diadata.db.dao.UserDao;
+import com.example.android.diadata.db.DiaDataDatabase;
+import com.example.android.diadata.db.model.User;
 
 import java.util.Arrays;
 import java.util.List;
@@ -68,6 +70,10 @@ public class UserDataForm extends Fragment {
         //lista de todos os campos presentes no formulário
         List<EditText> editTextList = Arrays.asList(userNameEditText, userForenameEditText, userAgeEditText);
 
+        //variaveis
+        String nome = null, subnome = null, genero = null;
+        int idade = 0, tipoDiabetes = 0;
+
         //for loop que verifica se todos os campos foram preenchidos
         for (EditText edit : editTextList) {
 
@@ -85,15 +91,17 @@ public class UserDataForm extends Fragment {
 
                     //campo do nome
                     case 0:
-
+                        nome = edit.getText().toString();
                         break;
 
                     //campo do subnome
                     case 1:
+                        subnome = edit.getText().toString();
                         break;
 
                     //campo da idade
                     case 2:
+                        idade = Integer.parseInt(edit.getText().toString());
                         break;
 
                 }
@@ -106,6 +114,12 @@ public class UserDataForm extends Fragment {
 
         //verifica se o utilizador selecionou um gênero
         //if (genderSpinner)
+
+        //criado o utilizador com os dados inseridos
+        User user = new User(nome, subnome, idade, tipoDiabetes, genero);
+
+        //adicionar o utilizador a base de dados
+        MainActivity.diaDataDatabase.userDao().addUser(user);
 
         return true;
     }

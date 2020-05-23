@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.android.diadata.MainActivity;
 import com.example.android.diadata.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -49,7 +50,7 @@ public class Dashboard extends Fragment {
     private void fetchData() {
 
         //insere o nome do utilizador
-        //userNameTextView.setText(String.format(getResources().getString(R.string.welcome_sentence_user), ));
+        userNameTextView.setText(String.format(getResources().getString(R.string.welcome_sentence_user), MainActivity.diaDataDatabase.userDao().getUserName()));
 
 
     }
