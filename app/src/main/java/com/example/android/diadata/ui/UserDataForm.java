@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -74,8 +75,8 @@ public class UserDataForm extends Fragment {
         List<EditText> editTextList = Arrays.asList(userNameEditText, userForenameEditText, userAgeEditText);
 
         //variaveis
-        String nome = null, subnome = null, genero = null;
-        int idade = 0, tipoDiabetes = 0;
+        String nome = null, subnome = null, genero;
+        int idade = 0, tipoDiabetes;
 
         //for loop que verifica se todos os campos foram preenchidos
         for (EditText edit : editTextList) {
@@ -117,12 +118,17 @@ public class UserDataForm extends Fragment {
         if (genderSpinner != null) {
             genero = genderSpinner.getSelectedItem().toString();
         } else {
-            genderSpinner.setW;
+            Toast.makeText(getContext(),"Por favor, selecione um gênero",Toast.LENGTH_SHORT).show();
             return false;
         }
 
         //verifica se o utilizador selecionou o tipo de diabetes
-        //if (genderSpinner)
+        if (diabetesSpinner != null) {
+            tipoDiabetes = Integer.parseInt(diabetesSpinner.getSelectedItem().toString());
+        } else {
+            Toast.makeText(getContext(),"Por favor, selecione o tipo de diabetes que possui",Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         //criado o utilizador com os dados inseridos
         User user = new User(nome, subnome, idade, tipoDiabetes, genero);
