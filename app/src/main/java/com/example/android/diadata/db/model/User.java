@@ -17,16 +17,16 @@ public class User {
     public int idade;
     @ColumnInfo(name = "tipo_diabetes")
     public boolean tipo_diabetes;
-    @ColumnInfo(name = "idade_diabetes")
-    public int idade_diabetes;
+    @ColumnInfo(name = "genero")
+    public String genero;
 
-    public User(int id, String nome, String subnome, int idade, boolean tipo_diabetes, int idade_diabetes) {
+    public User(int id, String nome, String subnome, int idade, boolean tipo_diabetes, String genero) {
         this.id = id;
         this.nome = nome;
         this.subnome = subnome;
         this.idade = idade;
         this.tipo_diabetes = tipo_diabetes;
-        this.idade_diabetes = idade_diabetes;
+        this.genero = genero;
     }
 
     }
