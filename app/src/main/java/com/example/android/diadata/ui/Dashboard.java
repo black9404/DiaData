@@ -51,7 +51,7 @@ public class Dashboard extends Fragment {
 
         //insere o nome do utilizador
         userNameTextView.setText(String.format(getResources().getString(R.string.welcome_sentence_user), MainActivity.diaDataDatabase.userDao().getUserName()));
-
+        //TODO: Adicionar o subnome juntamente com o nome no dashboard
 
     }
 

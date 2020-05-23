@@ -18,7 +18,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.android.diadata.MainActivity;
 import com.example.android.diadata.R;
-import com.example.android.diadata.db.DiaDataDatabase;
 import com.example.android.diadata.db.model.User;
 
 import java.util.Arrays;
@@ -30,7 +29,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class UserDataForm extends Fragment {
 
     private EditText userNameEditText, userForenameEditText, userAgeEditText;
-    private Spinner genderSpinner;
+    private Spinner genderSpinner, diabetesSpinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,9 +49,14 @@ public class UserDataForm extends Fragment {
         userAgeEditText = Objects.requireNonNull(getView()).findViewById(R.id.userAgeForm);
 
         genderSpinner = Objects.requireNonNull(getView()).findViewById(R.id.gender_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Objects.requireNonNull(getContext()), R.array.gender, android.R.layout.simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        genderSpinner.setAdapter(adapter);
+        ArrayAdapter<CharSequence> adapterGend = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.gender, android.R.layout.simple_spinner_dropdown_item);
+        adapterGend.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genderSpinner.setAdapter(adapterGend);
+
+        diabetesSpinner = Objects.requireNonNull(getView()).findViewById(R.id.diabetes_spinner);
+        ArrayAdapter<CharSequence> adapterDiab = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.diabetes, android.R.layout.simple_spinner_dropdown_item);
+        adapterDiab.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        diabetesSpinner.setAdapter(adapterDiab);
 
         Button submitFormButton = Objects.requireNonNull(getView()).findViewById(R.id.button);
         submitFormButton.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +68,6 @@ public class UserDataForm extends Fragment {
     }
 
     //metodo que verifica se os dados inseridos no formulário são válidos
-    //TODO: Alterar o método para armazenar os dados do formulário na base de dados
     private boolean checkIfDataIsValid() {
 
         //lista de todos os campos presentes no formulário
@@ -106,13 +109,19 @@ public class UserDataForm extends Fragment {
 
                 }
 
-
-                String retrievedInformation = edit.getText().toString();
             }
 
         }
 
         //verifica se o utilizador selecionou um gênero
+        if (genderSpinner != null) {
+            genero = genderSpinner.getSelectedItem().toString();
+        } else {
+            genderSpinner.setW;
+            return false;
+        }
+
+        //verifica se o utilizador selecionou o tipo de diabetes
         //if (genderSpinner)
 
         //criado o utilizador com os dados inseridos

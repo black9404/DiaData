@@ -118,33 +118,54 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@android:color/transparent"
-        android:text="@string/genero_form"
+        android:text="@string/tipo_de_diabetes"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userAgeForm" />
 
     <Spinner
-        android:id="@+id/gender_spinner"
+        android:id="@+id/diabetes_spinner"
         android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
         android:foregroundTint="@android:color/darker_gray"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@android:color/transparent"
+        android:text="@string/genero_form"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diabetes_spinner" />
+
+    <Spinner
+        android:id="@+id/gender_spinner"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:foregroundTint="@android:color/darker_gray"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
     <CheckBox
         android:id="@+id/checkBox"
-        android:layout_width="378dp"
-        android:layout_height="57dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="313dp"
+        android:layout_height="82dp"
         android:buttonTint="@android:color/darker_gray"
         android:text="@string/disclaimer_utilizadores"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

@@ -15,6 +15,12 @@
     <string name="disclaimer_utilizadores">Concordo com o facto de a presente aplicação não ser uma ferramenta médica precisa, sendo o seu propósito ser um auxiliar para os seus utilzadores.</string>
 
     <!-- Lista de gêneros -->
+    <string-array name="diabetes">
+        <item>Tipo 1</item>
+        <item>Tipo 2</item>
+    </string-array>
+
+    <!-- Lista de gêneros -->
     <string-array name="gender">
         <item>Male</item>
         <item>Female</item>
@@ -23,5 +29,6 @@
 
     <!-- Fragmento dashboard -->
     <string name="welcome_sentence_user">Bem-vindo, %s</string>
+    <string name="tipo_de_diabetes">Tipo de diabetes</string>
 
 </resources>
