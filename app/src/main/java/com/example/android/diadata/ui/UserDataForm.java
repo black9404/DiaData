@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ public class UserDataForm extends Fragment {
 
     private EditText userNameEditText, userForenameEditText, userAgeEditText;
     private Spinner genderSpinner, diabetesSpinner;
+    private CheckBox agreementCheckBox;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,13 +52,13 @@ public class UserDataForm extends Fragment {
         userAgeEditText = Objects.requireNonNull(getView()).findViewById(R.id.userAgeForm);
 
         genderSpinner = Objects.requireNonNull(getView()).findViewById(R.id.gender_spinner);
-        ArrayAdapter<CharSequence> adapterGend = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.gender, android.R.layout.simple_spinner_dropdown_item);
-        adapterGend.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapterGend = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.gender, R.layout.spinner_layout);
+        adapterGend.setDropDownViewResource(R.layout.spinner_layout);
         genderSpinner.setAdapter(adapterGend);
 
         diabetesSpinner = Objects.requireNonNull(getView()).findViewById(R.id.diabetes_spinner);
-        ArrayAdapter<CharSequence> adapterDiab = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.diabetes, android.R.layout.simple_spinner_dropdown_item);
-        adapterDiab.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapterDiab = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.diabetes, R.layout.spinner_layout);
+        adapterDiab.setDropDownViewResource(R.layout.spinner_layout);
         diabetesSpinner.setAdapter(adapterDiab);
 
         Button submitFormButton = Objects.requireNonNull(getView()).findViewById(R.id.button);
@@ -66,6 +68,9 @@ public class UserDataForm extends Fragment {
                 redirectToDashboard(checkIfDataIsValid());
             }
         });
+
+        agreementCheckBox = Objects.requireNonNull(getView()).findViewById(R.id.checkBox);
+
     }
 
     //metodo que verifica se os dados inseridos no formulário são válidos
@@ -76,7 +81,7 @@ public class UserDataForm extends Fragment {
 
         //variaveis
         String nome = null, subnome = null, genero;
-        int idade = 0, tipoDiabetes;
+        int idade = 0, tipoDiabetes = 0;
 
         //for loop que verifica se todos os campos foram preenchidos
         for (EditText edit : editTextList) {
@@ -114,8 +119,8 @@ public class UserDataForm extends Fragment {
 
         }
 
-        //verifica se o utilizador selecionou um gênero
-        if (genderSpinner != null) {
+        /*//verifica se o utilizador selecionou um gênero
+        if (genderSpinner.isPressed()) {
             genero = genderSpinner.getSelectedItem().toString();
         } else {
             Toast.makeText(getContext(),"Por favor, selecione um gênero",Toast.LENGTH_SHORT).show();
@@ -123,15 +128,30 @@ public class UserDataForm extends Fragment {
         }
 
         //verifica se o utilizador selecionou o tipo de diabetes
-        if (diabetesSpinner != null) {
-            tipoDiabetes = Integer.parseInt(diabetesSpinner.getSelectedItem().toString());
+        //alterar o isactivated
+        if (diabetesSpinner.isPressed()) {
+            String tipoDiabetesSelecionado = diabetesSpinner.getSelectedItem().toString();
+
+            if (tipoDiabetesSelecionado.equals("Tipo 1")){
+                tipoDiabetes = 1;
+            }
+            else if (tipoDiabetesSelecionado.equals("Tipo 2")){
+                tipoDiabetes = 2;
+            }
+
         } else {
             Toast.makeText(getContext(),"Por favor, selecione o tipo de diabetes que possui",Toast.LENGTH_SHORT).show();
+            return false;
+        }*/
+
+        //verifica se o utilizador aceitou os termos
+        if (!agreementCheckBox.isChecked()) {
+            Toast.makeText(getContext(),"Por favor concorde com os termos para prosseguir",Toast.LENGTH_SHORT).show();
             return false;
         }
 
         //criado o utilizador com os dados inseridos
-        User user = new User(nome, subnome, idade, tipoDiabetes, genero);
+        User user = new User(nome, subnome, idade, tipoDiabetes, "");
 
         //adicionar o utilizador a base de dados
         MainActivity.diaDataDatabase.userDao().addUser(user);

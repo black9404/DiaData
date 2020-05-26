@@ -24,7 +24,7 @@ public class Dashboard extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.dashboard, container, false);
+        return inflater.inflate(R.layout.dashboard_alternative, container, false);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class Dashboard extends Fragment {
 
     //metodo que instancia todos os elementos presentes no layout
     private void initViews() {
-        userNameTextView = Objects.requireNonNull(getView()).findViewById(R.id.username);
+        //userNameTextView = Objects.requireNonNull(getView()).findViewById(R.id.username);
         //addFloatingActionButton = getView().findViewById(R.id.fab);
         /*addFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +50,7 @@ public class Dashboard extends Fragment {
     private void fetchData() {
 
         //insere o nome do utilizador
-        userNameTextView.setText(String.format(getResources().getString(R.string.welcome_sentence_user), MainActivity.diaDataDatabase.userDao().getUserName()));
+        //userNameTextView.setText(String.format(getResources().getString(R.string.welcome_sentence_user), MainActivity.diaDataDatabase.userDao().getUserName()));
         //TODO: Adicionar o subnome juntamente com o nome no dashboard
 
     }

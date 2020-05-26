@@ -30,5 +30,7 @@
     <!-- Fragmento dashboard -->
     <string name="welcome_sentence_user">Bem-vindo, %s</string>
     <string name="tipo_de_diabetes">Tipo de diabetes</string>
+    <string name="profile">Profile</string>
+    <string name="notifications">Notifications</string>
 
 </resources>
