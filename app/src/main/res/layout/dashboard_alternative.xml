@@ -21,19 +21,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
-                android:text="Bem-vindo,"
+                android:layout_marginTop="10dp"
+                android:text="@string/mensagem_bem_vindo"
                 android:textColor="@android:color/black"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/userNameComplete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="José Pinheiro"
+                android:layout_marginEnd="10dp"
                 android:gravity="end"
+                android:text="@string/user_name_and_forename"
                 android:textColor="@android:color/black"
                 android:textSize="32sp" />
 
@@ -42,7 +43,10 @@
         <!-- Lista de Cardviews -->
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingBottom="120dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
