@@ -56,24 +56,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5"
         tools:ignore="LabelFor" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/teste"
-        android:layout_width="380dp"
-        android:layout_height="wrap_content"
-        android:hint="teste123"
-        app:layout_constraintBottom_toTopOf="@+id/userForenameForm"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameForm"
-        app:startIconDrawable="@drawable/ic_add"
-        app:startIconContentDescription="teste">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
@@ -85,7 +67,7 @@
         android:textAllCaps="true"
         android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teste" />
+        app:layout_constraintTop_toBottomOf="@+id/userNameForm" />
 
     <EditText
         android:id="@+id/userForenameForm"

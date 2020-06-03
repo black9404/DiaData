@@ -14,9 +14,6 @@ public interface UserDao {
     @Query("SELECT nome FROM user")
     String getUserName();
 
-    @Query("SELECT subnome FROM user")
-    String getUserSubname();
-
     @Insert
     void addUser(User user);
 
