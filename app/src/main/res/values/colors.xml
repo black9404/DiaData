@@ -10,4 +10,10 @@
 
     <!-- Adicionado para a dashboard -->
     <color name="colorEndBackground">#50FFFFFF</color>
+
+    <!-- User Profile -->
+    <color name="headings">#3797CF</color>
+    <color name="grey">#E5E5E5</color>
+    <color name="solidCircle">#AAFFFFFF</color>
+    <color name="circleBorder">#50FFFFFF</color>
 </resources>
