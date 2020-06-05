@@ -34,11 +34,13 @@
 
         <TextView
             android:id="@+id/textView11"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:text="@string/frase_sob_bem_vindo"
             android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -48,6 +50,8 @@
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:hint="Nome"
             app:counterEnabled="true"
             app:counterMaxLength="12"
@@ -69,6 +73,8 @@
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:hint="Apelido"
             app:counterEnabled="true"
             app:counterMaxLength="12"
@@ -90,6 +96,8 @@
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:hint="Idade"
             app:counterEnabled="true"
             app:counterMaxLength="3"
@@ -106,6 +114,7 @@
 
         <Spinner
             android:id="@+id/diabetes_spinner"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:foregroundTint="@android:color/darker_gray"
