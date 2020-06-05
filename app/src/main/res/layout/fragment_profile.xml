@@ -41,8 +41,6 @@
             android:text="Username"
             android:textColor="@color/white"
             android:textSize="32sp" />
-
-
     </RelativeLayout>
 
     <LinearLayout

@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             app:counterEnabled="true"
             app:counterMaxLength="12"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="Nome">
             
             <com.google.android.material.textfield.TextInputEditText
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             app:counterEnabled="true"
             app:counterMaxLength="12"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="Apelido">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -70,7 +70,7 @@
             android:id="@+id/idade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:counterEnabled="true"
             app:counterMaxLength="3"
             android:hint="Idade">
@@ -87,7 +87,7 @@
             android:id="@+id/tipoDiabetes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="Tipo Diabetes">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -102,7 +102,7 @@
             android:id="@+id/genero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="Género">
 
             <com.google.android.material.textfield.TextInputEditText
