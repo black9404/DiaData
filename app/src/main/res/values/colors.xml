@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#114B5F</color> <!-- Midnight green -->
+    <color name="midnight_green">#114B5F</color> <!-- Midnight green -->
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#1A936F</color> <!-- Illuminating emerald -->
     <color name="textPrimary">#000000</color>

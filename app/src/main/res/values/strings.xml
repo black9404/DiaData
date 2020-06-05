@@ -35,5 +35,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="user_name_and_forename">%s</string>
     <string name="mensagem_bem_vindo">Bem-vindo,</string>
+    <string name="signup_to_follow_your_diadata">SignUp to follow your DiaData</string>
 
 </resources>

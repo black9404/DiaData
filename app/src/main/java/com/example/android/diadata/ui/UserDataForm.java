@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.android.diadata.MainActivity;
 import com.example.android.diadata.R;
 import com.example.android.diadata.db.model.User;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,13 +31,12 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class UserDataForm extends Fragment {
 
-    private EditText userNameEditText, userForenameEditText, userAgeEditText;
-    private Spinner genderSpinner, diabetesSpinner;
+    private TextInputEditText userNameEditText, userForenameEditText, userAgeEditText;
     private CheckBox agreementCheckBox;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.user_data_form, container, false);
+        return inflater.inflate(R.layout.form_user_profile, container, false);
     }
 
     @Override
@@ -51,12 +51,12 @@ public class UserDataForm extends Fragment {
         userForenameEditText = Objects.requireNonNull(getView()).findViewById(R.id.userForenameForm);
         userAgeEditText = Objects.requireNonNull(getView()).findViewById(R.id.userAgeForm);
 
-        genderSpinner = Objects.requireNonNull(getView()).findViewById(R.id.gender_spinner);
+        /*Spinner genderSpinner = Objects.requireNonNull(getView()).findViewById(R.id.gender_spinner);
         ArrayAdapter<CharSequence> adapterGend = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.gender, R.layout.spinner_layout);
         adapterGend.setDropDownViewResource(R.layout.spinner_layout);
         genderSpinner.setAdapter(adapterGend);
 
-        diabetesSpinner = Objects.requireNonNull(getView()).findViewById(R.id.diabetes_spinner);
+        Spinner diabetesSpinner = Objects.requireNonNull(getView()).findViewById(R.id.diabetes_spinner);
         ArrayAdapter<CharSequence> adapterDiab = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.diabetes, R.layout.spinner_layout);
         adapterDiab.setDropDownViewResource(R.layout.spinner_layout);
         diabetesSpinner.setAdapter(adapterDiab);
@@ -67,7 +67,7 @@ public class UserDataForm extends Fragment {
             public void onClick(View v) {
                 redirectToDashboard(checkIfDataIsValid());
             }
-        });
+        });*/
 
         agreementCheckBox = Objects.requireNonNull(getView()).findViewById(R.id.checkBox);
 
@@ -77,10 +77,10 @@ public class UserDataForm extends Fragment {
     private boolean checkIfDataIsValid() {
 
         //lista de todos os campos presentes no formulário
-        List<EditText> editTextList = Arrays.asList(userNameEditText, userForenameEditText, userAgeEditText);
+        List<TextInputEditText> editTextList = Arrays.asList(userNameEditText, userForenameEditText, userAgeEditText);
 
         //variaveis
-        String nome = null, subnome = null, genero;
+        String nome = null, subnome = null;
         int idade = 0, tipoDiabetes = 0;
 
         //for loop que verifica se todos os campos foram preenchidos
@@ -119,34 +119,9 @@ public class UserDataForm extends Fragment {
 
         }
 
-        /*//verifica se o utilizador selecionou um gênero
-        if (genderSpinner.isPressed()) {
-            genero = genderSpinner.getSelectedItem().toString();
-        } else {
-            Toast.makeText(getContext(),"Por favor, selecione um gênero",Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        //verifica se o utilizador selecionou o tipo de diabetes
-        //alterar o isactivated
-        if (diabetesSpinner.isPressed()) {
-            String tipoDiabetesSelecionado = diabetesSpinner.getSelectedItem().toString();
-
-            if (tipoDiabetesSelecionado.equals("Tipo 1")){
-                tipoDiabetes = 1;
-            }
-            else if (tipoDiabetesSelecionado.equals("Tipo 2")){
-                tipoDiabetes = 2;
-            }
-
-        } else {
-            Toast.makeText(getContext(),"Por favor, selecione o tipo de diabetes que possui",Toast.LENGTH_SHORT).show();
-            return false;
-        }*/
-
         //verifica se o utilizador aceitou os termos
         if (!agreementCheckBox.isChecked()) {
-            Toast.makeText(getContext(),"Por favor concorde com os termos para prosseguir",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Por favor concorde com os termos para prosseguir", Toast.LENGTH_SHORT).show();
             return false;
         }
 
