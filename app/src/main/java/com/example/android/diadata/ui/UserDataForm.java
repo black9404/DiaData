@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -51,25 +51,25 @@ public class UserDataForm extends Fragment {
         userForenameEditText = Objects.requireNonNull(getView()).findViewById(R.id.userForenameForm);
         userAgeEditText = Objects.requireNonNull(getView()).findViewById(R.id.userAgeForm);
 
-        /*Spinner genderSpinner = Objects.requireNonNull(getView()).findViewById(R.id.gender_spinner);
-        ArrayAdapter<CharSequence> adapterGend = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.gender, R.layout.spinner_layout);
-        adapterGend.setDropDownViewResource(R.layout.spinner_layout);
+        AutoCompleteTextView genderSpinner = Objects.requireNonNull(getView()).findViewById(R.id.gender_spinner);
+        ArrayAdapter<CharSequence> adapterGend = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.gender, R.layout.dropdown_menu_popup_item);
+        adapterGend.setDropDownViewResource(R.layout.dropdown_menu_popup_item);
         genderSpinner.setAdapter(adapterGend);
 
-        Spinner diabetesSpinner = Objects.requireNonNull(getView()).findViewById(R.id.diabetes_spinner);
-        ArrayAdapter<CharSequence> adapterDiab = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.diabetes, R.layout.spinner_layout);
-        adapterDiab.setDropDownViewResource(R.layout.spinner_layout);
+        AutoCompleteTextView diabetesSpinner = Objects.requireNonNull(getView()).findViewById(R.id.diabetes_spinner);
+        ArrayAdapter<CharSequence> adapterDiab = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.diabetes, R.layout.dropdown_menu_popup_item);
+        adapterDiab.setDropDownViewResource(R.layout.dropdown_menu_popup_item);
         diabetesSpinner.setAdapter(adapterDiab);
 
-        Button submitFormButton = Objects.requireNonNull(getView()).findViewById(R.id.button);
+        /*Button submitFormButton = Objects.requireNonNull(getView()).findViewById(R.id.button);
         submitFormButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 redirectToDashboard(checkIfDataIsValid());
             }
-        });*/
+        });
 
-        agreementCheckBox = Objects.requireNonNull(getView()).findViewById(R.id.checkBox);
+        agreementCheckBox = Objects.requireNonNull(getView()).findViewById(R.id.checkBox);*/
 
     }
 

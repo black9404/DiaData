@@ -50,7 +50,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Nome"
+            android:hint="@string/nome"
             app:counterEnabled="true"
             app:counterMaxLength="12"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +74,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Apelido"
+            android:hint="@string/apelido"
             app:counterEnabled="true"
             app:counterMaxLength="12"
             app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +98,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Idade"
+            android:hint="@string/idade"
             app:counterEnabled="true"
             app:counterMaxLength="3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -115,31 +115,53 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/diabetes_spinner"
-            android:layout_width="380dp"
-            android:layout_height="wrap_content"
-            android:foregroundTint="@android:color/darker_gray"
-            android:textColor="@android:color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idade" />
-
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/genero"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="380dp"
+            android:id="@+id/diabetesType"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="Género"
+            android:hint="@string/tipo_de_diabetes"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/idade">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
+                android:id="@+id/diabetes_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:inputType="none"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/gender"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="10dp"
+            android:hint="@string/genero"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/diabetesType">
+
+            <AutoCompleteTextView
+                android:id="@+id/gender_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:inputType="none"
+                tools:ignore="LabelFor" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
