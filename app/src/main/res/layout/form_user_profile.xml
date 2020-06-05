@@ -161,7 +161,7 @@
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:inputType="none"
-                tools:ignore="LabelFor" />
+                tools:ignore="LabelFor"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
