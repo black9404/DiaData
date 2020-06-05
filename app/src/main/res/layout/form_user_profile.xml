@@ -47,7 +47,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nomePrincipal"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="380dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_marginStart="10dp"
@@ -70,7 +70,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/apelido"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="380dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_marginStart="10dp"
@@ -93,7 +93,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/idade"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="380dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_marginStart="10dp"
@@ -114,7 +114,6 @@
 
         <Spinner
             android:id="@+id/diabetes_spinner"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:foregroundTint="@android:color/darker_gray"
