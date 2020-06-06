@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +31,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class UserDataForm extends Fragment {
 
     private TextInputEditText userNameEditText, userForenameEditText, userAgeEditText;
+    private AutoCompleteTextView diabetesTextView, genderTextView;
     private CheckBox agreementCheckBox;
 
     @Override
@@ -51,17 +51,17 @@ public class UserDataForm extends Fragment {
         userForenameEditText = Objects.requireNonNull(getView()).findViewById(R.id.userForenameForm);
         userAgeEditText = Objects.requireNonNull(getView()).findViewById(R.id.userAgeForm);
 
-        AutoCompleteTextView genderSpinner = Objects.requireNonNull(getView()).findViewById(R.id.gender_spinner);
+        genderTextView = Objects.requireNonNull(getView()).findViewById(R.id.gender_spinner);
         ArrayAdapter<CharSequence> adapterGend = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.gender, R.layout.dropdown_menu_popup_item);
         adapterGend.setDropDownViewResource(R.layout.dropdown_menu_popup_item);
-        genderSpinner.setAdapter(adapterGend);
+        genderTextView.setAdapter(adapterGend);
 
-        AutoCompleteTextView diabetesSpinner = Objects.requireNonNull(getView()).findViewById(R.id.diabetes_spinner);
+        diabetesTextView = Objects.requireNonNull(getView()).findViewById(R.id.diabetes_spinner);
         ArrayAdapter<CharSequence> adapterDiab = ArrayAdapter.createFromResource(Objects.requireNonNull(getActivity()), R.array.diabetes, R.layout.dropdown_menu_popup_item);
         adapterDiab.setDropDownViewResource(R.layout.dropdown_menu_popup_item);
-        diabetesSpinner.setAdapter(adapterDiab);
+        diabetesTextView.setAdapter(adapterDiab);
 
-        /*Button submitFormButton = Objects.requireNonNull(getView()).findViewById(R.id.button);
+        Button submitFormButton = Objects.requireNonNull(getView()).findViewById(R.id.button);
         submitFormButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +69,7 @@ public class UserDataForm extends Fragment {
             }
         });
 
-        agreementCheckBox = Objects.requireNonNull(getView()).findViewById(R.id.checkBox);*/
+        agreementCheckBox = Objects.requireNonNull(getView()).findViewById(R.id.checkBox);
 
     }
 
@@ -78,13 +78,14 @@ public class UserDataForm extends Fragment {
 
         //lista de todos os campos presentes no formulário
         List<TextInputEditText> editTextList = Arrays.asList(userNameEditText, userForenameEditText, userAgeEditText);
+        List<AutoCompleteTextView> autoCompleteTextViewList = Arrays.asList(diabetesTextView, genderTextView);
 
         //variaveis
-        String nome = null, subnome = null;
+        String nome = null, subnome = null, genero = null;
         int idade = 0, tipoDiabetes = 0;
 
         //for loop que verifica se todos os campos foram preenchidos
-        for (EditText edit : editTextList) {
+        for (TextInputEditText edit : editTextList) {
 
             //verifica se o utilizador inseriu informação nos campos presentes no formulário
             if (TextUtils.isEmpty(edit.getText())) {
@@ -119,6 +120,41 @@ public class UserDataForm extends Fragment {
 
         }
 
+        //for loop que verifica se os spinner foram preenchidos
+        for (AutoCompleteTextView edit : autoCompleteTextViewList) {
+
+            //verifica se o utilizador inseriu informação nos campos presentes no formulário
+            if (TextUtils.isEmpty(edit.getText())) {
+                edit.setError("Por favor, preencha o campo assinalado");
+                return false;
+            }
+
+            //caso os valor inserido seja válido o mesmo é adicionada à String userInformation
+            else {
+
+                //verifica qual dos campos foi preenchido
+                switch (autoCompleteTextViewList.indexOf(edit)) {
+
+                    //spinner dos diabetes
+                    case 0:
+
+                        if (edit.getText().toString().equals("Tipo 1"))
+                            tipoDiabetes = 1;
+                        else if (edit.getText().toString().equals("Tipo 2"))
+                            tipoDiabetes = 2;
+                        break;
+
+                    //spinner do genero
+                    case 1:
+                        genero = edit.getText().toString();
+                        break;
+
+                }
+
+            }
+
+        }
+
         //verifica se o utilizador aceitou os termos
         if (!agreementCheckBox.isChecked()) {
             Toast.makeText(getContext(), "Por favor concorde com os termos para prosseguir", Toast.LENGTH_SHORT).show();
@@ -126,7 +162,7 @@ public class UserDataForm extends Fragment {
         }
 
         //criado o utilizador com os dados inseridos
-        User user = new User(nome, subnome, idade, tipoDiabetes, "");
+        User user = new User(nome, subnome, idade, tipoDiabetes, genero);
 
         //adicionar o utilizador a base de dados
         MainActivity.diaDataDatabase.userDao().addUser(user);
