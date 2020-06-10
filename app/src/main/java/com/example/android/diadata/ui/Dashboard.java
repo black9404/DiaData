@@ -5,18 +5,21 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.android.diadata.MainActivity;
 import com.example.android.diadata.R;
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
@@ -28,6 +31,7 @@ public class Dashboard extends Fragment {
     private NotificationManagerCompat notificationManager;
 
     private TextView userNameTextView;
+    private BottomAppBar bottomAppBar;
     private FloatingActionButton addFloatingActionButton;
 
     @Override
@@ -39,12 +43,29 @@ public class Dashboard extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews();
-        fetchData();
+        //fetchData();
     }
 
     //metodo que instancia todos os elementos presentes no layout
     private void initViews() {
-        userNameTextView = Objects.requireNonNull(getView()).findViewById(R.id.userNameComplete);
+        //userNameTextView = Objects.requireNonNull(getView()).findViewById(R.id.userNameComplete);
+
+        bottomAppBar = Objects.requireNonNull(getView()).findViewById(R.id.bar);
+        bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                if (item.getItemId() == R.id.navProfile) {
+                    redirectToProfile();
+                    return true;
+                } else if (item.getItemId() == R.id.navNotifications) {
+                    //doSomething();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
 
         addFloatingActionButton = Objects.requireNonNull(getView()).findViewById(R.id.fab);
         addFloatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -74,11 +95,14 @@ public class Dashboard extends Fragment {
 
     //metodo que redireciona o utilizador para o fragmento de adicionar dados
     private void addData() {
+
+        //redireciona o utilizador para adicionar novos dados
         Fragment addNewDataFragment = new AddNewDataFragment();
         FragmentTransaction transaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         transaction.replace(R.id.fragment_container, addNewDataFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+
     }
 
     //metodo que acede a todas as notificações enviadas ao utilizador
@@ -95,6 +119,18 @@ public class Dashboard extends Fragment {
                 .build();
 
         notificationManager.notify(1, notification);
+
+    }
+
+    //metodo que redireciona o utilizador para o perfil
+    private void redirectToProfile() {
+
+        //redireciona o utilizador para o perfil
+        Fragment profile = new Profile();
+        FragmentTransaction transaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
+        transaction.replace(R.id.fragment_container, profile);
+        transaction.addToBackStack(null);
+        transaction.commit();
 
     }
 

@@ -40,5 +40,6 @@
     <string name="idade">Idade</string>
     <string name="apelido">Apelido</string>
     <string name="nome">Nome</string>
+    <string name="profile_name_info">%s</string>
 
 </resources>
