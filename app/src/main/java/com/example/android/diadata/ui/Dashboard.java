@@ -1,6 +1,7 @@
 package com.example.android.diadata.ui;
 
 import android.app.Notification;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -16,14 +18,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.android.diadata.MainActivity;
 import com.example.android.diadata.R;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.example.android.diadata.core.App.CHANNEL_ID;
 
 public class Dashboard extends Fragment {
@@ -43,12 +46,11 @@ public class Dashboard extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews();
-        //fetchData();
+        loadNotificationsIcon();
     }
 
     //metodo que instancia todos os elementos presentes no layout
     private void initViews() {
-        //userNameTextView = Objects.requireNonNull(getView()).findViewById(R.id.userNameComplete);
 
         bottomAppBar = Objects.requireNonNull(getView()).findViewById(R.id.bar);
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -59,7 +61,7 @@ public class Dashboard extends Fragment {
                     redirectToProfile();
                     return true;
                 } else if (item.getItemId() == R.id.navNotifications) {
-                    //doSomething();
+                    toggleNotificationStatus(item);
                     return true;
                 } else {
                     return false;
@@ -78,7 +80,7 @@ public class Dashboard extends Fragment {
 
     }
 
-    //metodo que preenche as informações armazenadas
+    /*//metodo que preenche as informações armazenadas
     private void fetchData() {
 
         //obtem o nome e o subnome do utilizador
@@ -91,7 +93,7 @@ public class Dashboard extends Fragment {
         //insere o nome do utilizador no dashboard
         userNameTextView.setText(nomeCompleto);
 
-    }
+    }*/
 
     //metodo que redireciona o utilizador para o fragmento de adicionar dados
     private void addData() {
@@ -131,6 +133,59 @@ public class Dashboard extends Fragment {
         transaction.replace(R.id.fragment_container, profile);
         transaction.addToBackStack(null);
         transaction.commit();
+
+    }
+
+    //metodo que liga ou desliga as notificações durante um periodo de tempo
+    private void toggleNotificationStatus(MenuItem item) {
+
+        SharedPreferences sharedPreferences = Objects.requireNonNull(getContext()).getSharedPreferences("prefs", MODE_PRIVATE);
+        boolean notificationStatus = sharedPreferences.getBoolean("notificationStatus", false);
+
+        if (notificationStatus) {
+
+            //alterado o icon
+            item.setIcon(getContext().getDrawable(R.drawable.ic_notifications_active));
+
+            //mostrada imagem ao utilizador uma mensagem a informar a ação
+            Toast.makeText(getContext(),"As notificações da aplicação foram reativadas",Toast.LENGTH_SHORT).show();
+
+            //atualizadas as SharedPreferences
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("notificationStatus", false);
+            editor.apply();
+        }
+
+        else {
+
+            //alterado o icon
+            item.setIcon(getContext().getDrawable(R.drawable.ic_notifications_inactive));
+
+            //mostrada imagem ao utilizador uma mensagem a informar a ação
+            Toast.makeText(getContext(),"As notificações da aplicação foram desativadas durante 8 horas",Toast.LENGTH_SHORT).show();
+
+            //atualizadas as SharedPreferences
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("notificationStatus", true);
+            editor.apply();
+        }
+
+    }
+
+    //metodo que verifica o estado do icone das notificações e atualiza o icon de acordo
+    private void loadNotificationsIcon() {
+
+        SharedPreferences sharedPreferences = Objects.requireNonNull(getContext()).getSharedPreferences("prefs", MODE_PRIVATE);
+        MenuItem item = bottomAppBar.getMenu().findItem(R.id.navNotifications);
+        boolean notificationStatus = sharedPreferences.getBoolean("notificationStatus", false);
+
+        if (notificationStatus) {
+            item.setIcon(getContext().getDrawable(R.drawable.ic_notifications_active));
+        }
+
+        else {
+            item.setIcon(getContext().getDrawable(R.drawable.ic_notifications_inactive));
+        }
 
     }
 
