@@ -17,6 +17,15 @@ public interface UserDao {
     @Query("SELECT subnome FROM user")
     String getUserSubname();
 
+    @Query("SELECT idade FROM user")
+    int getIdade();
+
+    @Query("SELECT tipo_diabetes FROM user")
+    int getTDiabetes();
+
+    @Query("SELECT genero FROM user")
+    String getGenero();
+
     @Insert
     void addUser(User user);
 
