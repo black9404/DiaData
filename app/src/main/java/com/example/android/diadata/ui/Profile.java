@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import java.util.Objects;
 public class Profile extends Fragment {
 
     private TextView userName, age, tipoD, generoU;
+    private ImageView backButtonImageView;
 
     @Nullable
     @Override
@@ -34,6 +36,15 @@ public class Profile extends Fragment {
 
     //metodo que instancia todos os elementos presentes no layout
     private void initViews() {
+
+        backButtonImageView = Objects.requireNonNull(getView()).findViewById(R.id.backButton);
+        backButtonImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStackImmediate();
+            }
+        });
+
         userName = Objects.requireNonNull(getView()).findViewById(R.id.userName);
         age = Objects.requireNonNull(getView()).findViewById(R.id.idadeForm);
         tipoD = Objects.requireNonNull(getView()).findViewById(R.id.tipoDiabetesForm);
