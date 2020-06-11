@@ -14,16 +14,13 @@ public class Food {
     @ColumnInfo(name = "hidratos")
     private int hidratos;
     @ColumnInfo(name = "tipo_alimento")
-    private boolean t_alimento;
-    @ColumnInfo(name = "quantidade_alimento")
-    private int qnt_alimento;
+    private int t_alimento;
 
-    public Food(int id_food, String food_name, int hidratos, boolean t_alimento, int qnt_alimento) {
+    public Food(int id_food, String food_name, int hidratos, int t_alimento) {
         this.id_food = id_food;
         this.food_name = food_name;
         this.hidratos = hidratos;
         this.t_alimento = t_alimento;
-        this.qnt_alimento = qnt_alimento;
     }
 
     public int getId_food() {
@@ -50,19 +47,11 @@ public class Food {
         this.hidratos = hidratos;
     }
 
-    public boolean isT_alimento() {
+    public int getT_alimento() {
         return t_alimento;
     }
 
-    public void setT_alimento(boolean t_alimento) {
+    public void setT_alimento(int t_alimento) {
         this.t_alimento = t_alimento;
-    }
-
-    public int getQnt_alimento() {
-        return qnt_alimento;
-    }
-
-    public void setQnt_alimento(int qnt_alimento) {
-        this.qnt_alimento = qnt_alimento;
     }
 }

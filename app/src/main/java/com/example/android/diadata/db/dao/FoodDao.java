@@ -16,6 +16,14 @@ public interface FoodDao {
     /*@Query("Select nome from food")
     List<Food> getAlimentos();*/
 
+    //Buscar todos os tipos de alimentos existentes
+    @Query("SELECT tipo_alimento FROM food")
+    int getTipoAlimento();
+
+    //Buscar todos os alimentos correspondestes ao tipo selecionado
+    @Query("SELECT nome from food WHERE tipo_alimento = :t_alimento")
+    String getNomePorTipoAlimento(int t_alimento);
+
     @Insert
     void addAlimento(Food food);
 

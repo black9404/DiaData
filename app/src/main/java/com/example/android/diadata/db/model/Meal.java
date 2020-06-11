@@ -1,5 +1,6 @@
 package com.example.android.diadata.db.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -7,14 +8,16 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "meal")
 public class Meal {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "nome_meal")
+    private String nome;
+    @ColumnInfo(name = "id_meal")
     private int id_meal;
     @ColumnInfo(name = "id_user")
     private int id_user;
     @ColumnInfo(name = "qnt_hidratos")
     private int hidratos;
-    @ColumnInfo(name = "nome_meal")
-    private String nome;
     @ColumnInfo(name = "dia_meal")
     private int dia;
     @ColumnInfo(name = "mes_meal")
