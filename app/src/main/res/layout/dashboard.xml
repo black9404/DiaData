@@ -62,12 +62,12 @@
     <!-- Barra de navegação -->
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bar"
+        app:fabAlignmentMode="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:backgroundTint="@color/midnight_green"
-        app:menu="@menu/bottom_nav_menu"
-        app:navigationIcon="@drawable/ic_menu" />
+        app:menu="@menu/bottom_nav_menu" />
 
     <!-- Botão adicionar -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton

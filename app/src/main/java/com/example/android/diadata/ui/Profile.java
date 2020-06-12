@@ -18,8 +18,7 @@ import java.util.Objects;
 
 public class Profile extends Fragment {
 
-    private TextView userName, age, tipoD, generoU;
-    private ImageView backButtonImageView;
+    private TextView userNameTextView, ageTextView, typeDiabetesTextView, genderTextView;
 
     @Nullable
     @Override
@@ -37,18 +36,21 @@ public class Profile extends Fragment {
     //metodo que instancia todos os elementos presentes no layout
     private void initViews() {
 
-        backButtonImageView = Objects.requireNonNull(getView()).findViewById(R.id.backButton);
+        ImageView backButtonImageView = Objects.requireNonNull(getView()).findViewById(R.id.backButton);
         backButtonImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().popBackStackImmediate();
+                Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStackImmediate();
             }
         });
 
-        userName = Objects.requireNonNull(getView()).findViewById(R.id.userName);
-        age = Objects.requireNonNull(getView()).findViewById(R.id.idadeForm);
-        tipoD = Objects.requireNonNull(getView()).findViewById(R.id.tipoDiabetesForm);
-        generoU = Objects.requireNonNull(getView()).findViewById(R.id.generoForm);
+        userNameTextView = Objects.requireNonNull(getView()).findViewById(R.id.userName);
+
+        ageTextView = Objects.requireNonNull(getView()).findViewById(R.id.idadeForm);
+
+        typeDiabetesTextView = Objects.requireNonNull(getView()).findViewById(R.id.tipoDiabetesForm);
+
+        genderTextView = Objects.requireNonNull(getView()).findViewById(R.id.generoForm);
     }
 
     //metodo que preenche os campos com a informação do utilizador
@@ -63,7 +65,7 @@ public class Profile extends Fragment {
         String idade = String.valueOf(MainActivity.diaDataDatabase.userDao().getIdade());
 
         //obtem o tipo de diabetes do utilizador
-        String TDiabetes = "";
+        String TDiabetes;
         if (MainActivity.diaDataDatabase.userDao().getTDiabetes() == 1){
             TDiabetes = "Tipo 1";
         }else{
@@ -74,10 +76,10 @@ public class Profile extends Fragment {
         String genero = MainActivity.diaDataDatabase.userDao().getGenero();
 
         //insere os dados no layout
-        userName.setText(nome);
-        age.setText(idade);
-        tipoD.setText(TDiabetes);
-        generoU.setText(genero);
+        userNameTextView.setText(nome);
+        ageTextView.setText(idade);
+        typeDiabetesTextView.setText(TDiabetes);
+        genderTextView.setText(genero);
     }
 
 }
