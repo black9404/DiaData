@@ -9,11 +9,13 @@ import androidx.room.RoomDatabase;
 import com.example.android.diadata.db.dao.FoodDao;
 import com.example.android.diadata.db.dao.MealDao;
 import com.example.android.diadata.db.dao.UserDao;
+import com.example.android.diadata.db.dao.DashDataDao;
+import com.example.android.diadata.db.model.DashData;
 import com.example.android.diadata.db.model.Food;
 import com.example.android.diadata.db.model.Meal;
 import com.example.android.diadata.db.model.User;
 
-@Database(entities = {User.class, Meal.class, Food.class}, version = 1)
+@Database(entities = {User.class, Meal.class, Food.class, DashData.class}, version = 1)
 public abstract class DiaDataDatabase extends RoomDatabase {
     private static final String DB_NAME = "DiaData_db";
     private static DiaDataDatabase instance;
@@ -32,4 +34,6 @@ public abstract class DiaDataDatabase extends RoomDatabase {
     public abstract MealDao mealDao();
 
     public abstract FoodDao foodDao();
+
+    public abstract DashDataDao DashData();
 }
