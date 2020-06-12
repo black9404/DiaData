@@ -16,8 +16,7 @@ public class Food {
     @ColumnInfo(name = "tipo_alimento")
     private int t_alimento;
 
-    public Food(int id_food, String food_name, int hidratos, int t_alimento) {
-        this.id_food = id_food;
+    public Food(String food_name, int hidratos, int t_alimento) {
         this.food_name = food_name;
         this.hidratos = hidratos;
         this.t_alimento = t_alimento;

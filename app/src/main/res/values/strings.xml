@@ -14,7 +14,7 @@
     <string name="botao_submeter">Submeter</string>
     <string name="disclaimer_utilizadores">Concordo com o facto de a presente aplicação não ser uma ferramenta médica precisa, sendo o seu propósito ser um auxiliar para os seus utilzadores.</string>
 
-    <!-- Lista de gêneros -->
+    <!-- Lista de diabetes -->
     <string-array name="diabetes">
         <item>Tipo 1</item>
         <item>Tipo 2</item>
@@ -25,6 +25,18 @@
         <item>Masculino</item>
         <item>Feminino</item>
         <item>Outro</item>
+    </string-array>
+
+    <!-- Lista de tipos de Alimento -->
+    <string-array name="food_type">
+        <item>Carboidratos</item>
+        <item>Verduras e Legumes</item>
+        <item>Frutas</item>
+        <item>Leite e derivados</item>
+        <item>Carnes e Ovos</item>
+        <item>Leguminosas e Oleaginosas</item>
+        <item>Óleos e Gurduras</item>
+        <item>Açucares e Doces</item>
     </string-array>
 
     <!-- Fragmento dashboard -->
