@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -21,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.diadata.R;
+import com.example.android.diadata.animation.FabAnimation;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -31,11 +31,13 @@ import static com.example.android.diadata.core.App.CHANNEL_ID;
 
 public class Dashboard extends Fragment {
 
+    boolean isRotate = false;
+
     private NotificationManagerCompat notificationManager;
 
     private TextView userNameTextView;
     private BottomAppBar bottomAppBar;
-    private FloatingActionButton addFloatingActionButton;
+    private FloatingActionButton addFloatingActionButton, addMealFloatingActionButton, addFoodFloatingActionButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +58,6 @@ public class Dashboard extends Fragment {
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-
                 if (item.getItemId() == R.id.navProfile) {
                     redirectToProfile();
                     return true;
@@ -69,37 +70,48 @@ public class Dashboard extends Fragment {
             }
         });
 
+        addMealFloatingActionButton = Objects.requireNonNull(getView()).findViewById(R.id.addMeal);
+        addMealFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectToMeal();
+            }
+        });
+        FabAnimation.init(addMealFloatingActionButton);
+
+        addFoodFloatingActionButton = Objects.requireNonNull(getView()).findViewById(R.id.addFood);
+        addFoodFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectToFood();
+            }
+        });
+        FabAnimation.init(addFoodFloatingActionButton);
+
         addFloatingActionButton = Objects.requireNonNull(getView()).findViewById(R.id.fab);
         addFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                testNotifications();
-                addData();
+                isRotate = FabAnimation.rotateFab(v, !isRotate);
+                if(isRotate){
+                    FabAnimation.showIn(addMealFloatingActionButton);
+                    FabAnimation.showIn(addFoodFloatingActionButton);
+                }else{
+                    FabAnimation.showOut(addMealFloatingActionButton);
+                    FabAnimation.showOut(addFoodFloatingActionButton);
+                }
+                //testNotifications();
+                //addData();
             }
         });
 
     }
 
-    /*//metodo que preenche as informações armazenadas
-    private void fetchData() {
-
-        //obtem o nome e o subnome do utilizador
-        String nomeProprio = MainActivity.diaDataDatabase.userDao().getUserName();
-        String subNome = MainActivity.diaDataDatabase.userDao().getUserSubname();
-
-        //junta os nomes obtidos
-        String nomeCompleto = nomeProprio + " " + subNome;
-
-        //insere o nome do utilizador no dashboard
-        userNameTextView.setText(nomeCompleto);
-
-    }*/
-
     //metodo que redireciona o utilizador para o fragmento de adicionar dados
     private void addData() {
 
         //redireciona o utilizador para adicionar novos dados
-        Fragment addNewDataFragment = new AddNewDataFragment();
+        Fragment addNewDataFragment = new Dashboard();
         FragmentTransaction transaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         transaction.replace(R.id.fragment_container, addNewDataFragment);
         transaction.addToBackStack(null);
@@ -126,14 +138,29 @@ public class Dashboard extends Fragment {
 
     //metodo que redireciona o utilizador para o perfil
     private void redirectToProfile() {
-
-        //redireciona o utilizador para o perfil
         Fragment profile = new Profile();
         FragmentTransaction transaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         transaction.replace(R.id.fragment_container, profile);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
 
+    //metodo que redireciona o utilizador para adicionar um alimento
+    private void redirectToFood() {
+        Fragment newFood = new NewFood();
+        FragmentTransaction transaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
+        transaction.replace(R.id.fragment_container, newFood);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    //metodo que redireciona o utilizador para adicionar uma refeição
+    private void redirectToMeal() {
+        Fragment newMeal = new NewMeal();
+        FragmentTransaction transaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
+        transaction.replace(R.id.fragment_container, newMeal);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     //metodo que liga ou desliga as notificações durante um periodo de tempo

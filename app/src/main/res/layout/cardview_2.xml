@@ -50,7 +50,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_margin="30dp"
-                android:src="@drawable/ic_insulin"
+                android:src="@drawable/ic_vaccine"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
