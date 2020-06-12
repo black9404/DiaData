@@ -41,7 +41,7 @@ public class NewFood extends Fragment {
         initViews();
     }
 
-    //Inicia as variaveis
+    //metodo que instancia todos os elementos presentes no layout
     private void initViews() {
         nome = Objects.requireNonNull(getView()).findViewById(R.id.userNameForm);
 
