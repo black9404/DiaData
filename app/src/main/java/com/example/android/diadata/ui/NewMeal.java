@@ -3,6 +3,7 @@ package com.example.android.diadata.ui;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -32,7 +33,11 @@ import java.util.Objects;
 
 public class NewMeal extends Fragment {
 
+    private boolean recyclerViewOpen = false;
+
     private SearchFoodAdapter searchFoodAdapter;
+
+    private RecyclerView recyclerView;
 
     private ArrayList<String> foodArrayList;
 
@@ -49,8 +54,8 @@ public class NewMeal extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         fetchFoodFromDatabaseToArray();
-        setUpRecyclerView();
         initViews();
+        setUpRecyclerView();
     }
 
     //metodo que instancia todos os elementos presentes no layout
@@ -65,12 +70,22 @@ public class NewMeal extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
-                searchFoodAdapter.getFilter().filter(newText);
+
+                if (TextUtils.isEmpty(newText)) {
+                    recyclerView.setVisibility(View.INVISIBLE);
+                } else {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    searchFoodAdapter.getFilter().filter(newText);
+                }
+
                 return false;
             }
         });
+
+        recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.recycler_view);
 
         Button submitFormButton = Objects.requireNonNull(getView()).findViewById(R.id.button);
         submitFormButton.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +113,6 @@ public class NewMeal extends Fragment {
 
     //metodo que prepara a RecyclerView de procura
     private void setUpRecyclerView() {
-        RecyclerView recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         searchFoodAdapter = new SearchFoodAdapter(foodArrayList);
@@ -107,12 +121,15 @@ public class NewMeal extends Fragment {
     }
 
     //metodo que pesquisa de entre os alimentos todos
-    private void searchFoodFromDatabase() {}
+    private void searchFoodFromDatabase() {
+    }
 
     //metodo que verifica se os dados introduzidos pelo utilizador são válidos
-    private void checkIfDataIsValid() {}
+    private void checkIfDataIsValid() {
+    }
 
     //metodo que insere os dados introduzidos na base de dados
-    private void addDataToDatabase() {}
+    private void addDataToDatabase() {
+    }
 
 }
