@@ -58,7 +58,10 @@ public class Dashboard extends Fragment {
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.navProfile) {
+                if (item.getItemId() == R.id.navMedicao) {
+                    redirectToMeasurement();
+                    return true;
+                }else if (item.getItemId() == R.id.navProfile) {
                     redirectToProfile();
                     return true;
                 } else if (item.getItemId() == R.id.navNotifications) {
@@ -145,6 +148,15 @@ public class Dashboard extends Fragment {
         transaction.commit();
     }
 
+    //metodo que redireciona o utilizador para a medição e aplicação de insulina
+    private void redirectToMeasurement(){
+        Fragment NewMeasurement = new NewMeasurement();
+        FragmentTransaction transaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
+        transaction.replace(R.id.fragment_container, NewMeasurement);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     //metodo que redireciona o utilizador para adicionar um alimento
     private void redirectToFood() {
         Fragment newFood = new NewFood();
@@ -215,5 +227,4 @@ public class Dashboard extends Fragment {
         }
 
     }
-
 }
