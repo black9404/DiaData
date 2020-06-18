@@ -1,6 +1,8 @@
 package com.example.android.diadata.ui;
 
 import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -19,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.diadata.MainActivity;
 import com.example.android.diadata.R;
 import com.example.android.diadata.animation.FabAnimation;
 import com.google.android.material.bottomappbar.BottomAppBar;
@@ -61,7 +64,8 @@ public class Dashboard extends Fragment {
                 if (item.getItemId() == R.id.navMedicao) {
                     redirectToMeasurement();
                     return true;
-                }else if (item.getItemId() == R.id.navProfile) {
+                }
+                if (item.getItemId() == R.id.navProfile) {
                     redirectToProfile();
                     return true;
                 } else if (item.getItemId() == R.id.navNotifications) {
@@ -103,7 +107,7 @@ public class Dashboard extends Fragment {
                     FabAnimation.showOut(addMealFloatingActionButton);
                     FabAnimation.showOut(addFoodFloatingActionButton);
                 }
-                //testNotifications();
+                testNotifications();
                 //addData();
             }
         });
@@ -125,6 +129,12 @@ public class Dashboard extends Fragment {
     //metodo que acede a todas as notificações enviadas ao utilizador
     private void testNotifications() {
 
+        //On click of notification it redirect to this MainActivity
+        Intent intent = new Intent(this.getContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
+
+
         notificationManager = NotificationManagerCompat.from(Objects.requireNonNull(getContext()));
 
         Notification notification = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
@@ -133,11 +143,15 @@ public class Dashboard extends Fragment {
                 .setContentText("message")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                //Intent notification
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
                 .build();
 
         notificationManager.notify(1, notification);
-
     }
+
+
 
     //metodo que redireciona o utilizador para o perfil
     private void redirectToProfile() {
