@@ -100,10 +100,10 @@ public class Dashboard extends Fragment {
             @Override
             public void onClick(View v) {
                 isRotate = FabAnimation.rotateFab(v, !isRotate);
-                if(isRotate){
+                if (isRotate) {
                     FabAnimation.showIn(addMealFloatingActionButton);
                     FabAnimation.showIn(addFoodFloatingActionButton);
-                }else{
+                } else {
                     FabAnimation.showOut(addMealFloatingActionButton);
                     FabAnimation.showOut(addFoodFloatingActionButton);
                 }
@@ -129,11 +129,9 @@ public class Dashboard extends Fragment {
     //metodo que acede a todas as notificações enviadas ao utilizador
     private void testNotifications() {
 
-        //On click of notification it redirect to this MainActivity
-        Intent intent = new Intent(this.getContext(), MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.putExtra("openFragment", "newDose");
         PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
-
 
         notificationManager = NotificationManagerCompat.from(Objects.requireNonNull(getContext()));
 
@@ -141,17 +139,14 @@ public class Dashboard extends Fragment {
                 .setSmallIcon(R.drawable.app_icon)
                 .setContentTitle("Teste")
                 .setContentText("message")
+                .setContentIntent(pendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                //Intent notification
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
                 .build();
 
         notificationManager.notify(1, notification);
+
     }
-
-
 
     //metodo que redireciona o utilizador para o perfil
     private void redirectToProfile() {
@@ -163,7 +158,7 @@ public class Dashboard extends Fragment {
     }
 
     //metodo que redireciona o utilizador para a medição e aplicação de insulina
-    private void redirectToMeasurement(){
+    private void redirectToMeasurement() {
         Fragment NewMeasurement = new NewMeasurement();
         FragmentTransaction transaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         transaction.replace(R.id.fragment_container, NewMeasurement);
@@ -201,21 +196,19 @@ public class Dashboard extends Fragment {
             item.setIcon(getContext().getDrawable(R.drawable.ic_notifications_active));
 
             //mostrada imagem ao utilizador uma mensagem a informar a ação
-            Toast.makeText(getContext(),"As notificações da aplicação foram reativadas",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "As notificações da aplicação foram reativadas", Toast.LENGTH_SHORT).show();
 
             //atualizadas as SharedPreferences
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("notificationStatus", false);
             editor.apply();
-        }
-
-        else {
+        } else {
 
             //alterado o icon
             item.setIcon(getContext().getDrawable(R.drawable.ic_notifications_inactive));
 
             //mostrada imagem ao utilizador uma mensagem a informar a ação
-            Toast.makeText(getContext(),"As notificações da aplicação foram desativadas durante 8 horas",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "As notificações da aplicação foram desativadas durante 8 horas", Toast.LENGTH_SHORT).show();
 
             //atualizadas as SharedPreferences
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -234,9 +227,7 @@ public class Dashboard extends Fragment {
 
         if (notificationStatus) {
             item.setIcon(getContext().getDrawable(R.drawable.ic_notifications_active));
-        }
-
-        else {
+        } else {
             item.setIcon(getContext().getDrawable(R.drawable.ic_notifications_inactive));
         }
 
