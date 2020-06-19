@@ -25,6 +25,11 @@
             android:launchMode="singleTask"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateVisible|adjustPan" />
+
+        <receiver android:name=".Notification_reciever"/>
+
     </application>
+
+
 
 </manifest>
