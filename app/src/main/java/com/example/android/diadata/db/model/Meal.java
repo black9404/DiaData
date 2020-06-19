@@ -14,8 +14,8 @@ public class Meal {
     private String nome;
     @ColumnInfo(name = "id_meal")
     private int id_meal;
-    @ColumnInfo(name = "id_user")
-    private int id_user;
+    @ColumnInfo(name = "id_alimento")
+    private int id_alimento;
     @ColumnInfo(name = "qnt_hidratos")
     private int hidratos;
     @ColumnInfo(name = "dia_meal")
@@ -23,13 +23,22 @@ public class Meal {
     @ColumnInfo(name = "mes_meal")
     private int mes;
 
-    public Meal(int id_meal, int id_user, int hidratos, String nome, int dia, int mes) {
+    public Meal(int id_meal, int id_alimento, int hidratos, String nome, int dia, int mes) {
         this.id_meal = id_meal;
-        this.id_user = id_user;
+        this.id_alimento = id_alimento;
         this.hidratos = hidratos;
         this.nome = nome;
         this.dia = dia;
         this.mes = mes;
+    }
+
+    @NonNull
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(@NonNull String nome) {
+        this.nome = nome;
     }
 
     public int getId_meal() {
@@ -40,12 +49,12 @@ public class Meal {
         this.id_meal = id_meal;
     }
 
-    public int getId_user() {
-        return id_user;
+    public int getId_alimento() {
+        return id_alimento;
     }
 
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
+    public void setId_alimento(int id_alimento) {
+        this.id_alimento = id_alimento;
     }
 
     public int getHidratos() {
@@ -54,14 +63,6 @@ public class Meal {
 
     public void setHidratos(int hidratos) {
         this.hidratos = hidratos;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public int getDia() {
