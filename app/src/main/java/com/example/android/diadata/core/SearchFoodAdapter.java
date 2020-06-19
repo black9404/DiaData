@@ -17,8 +17,8 @@ import java.util.List;
 
 public class SearchFoodAdapter extends RecyclerView.Adapter<SearchFoodAdapter.SearchFoodViewHolder> implements Filterable {
 
-    private ArrayList<String> foodArrayList;
-    private ArrayList<String> foodArrayListFull;
+    private ArrayList<String> foodArrayList, foodArrayListFull;
+    private OnItemClickListener onItemClickListener;
 
     public SearchFoodAdapter(ArrayList<String> foodArrayList) {
         this.foodArrayList = foodArrayList;
@@ -29,12 +29,12 @@ public class SearchFoodAdapter extends RecyclerView.Adapter<SearchFoodAdapter.Se
     @Override
     public SearchFoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_food_item, parent, false);
-        return new SearchFoodViewHolder(v);
+        return new SearchFoodViewHolder(v, onItemClickListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchFoodAdapter.SearchFoodViewHolder holder, int position) {
-        String currentItem = foodArrayList.get(position);
+    public void onBindViewHolder(@NonNull final SearchFoodAdapter.SearchFoodViewHolder holder, int position) {
+        final String currentItem = foodArrayList.get(position);
         holder.foodNameTextView.setText(currentItem);
     }
 
@@ -75,16 +75,31 @@ public class SearchFoodAdapter extends RecyclerView.Adapter<SearchFoodAdapter.Se
         return filter;
     }
 
-    static class SearchFoodViewHolder extends RecyclerView.ViewHolder {
+    class SearchFoodViewHolder extends RecyclerView.ViewHolder {
 
         TextView foodNameTextView;
 
-        public SearchFoodViewHolder(@NonNull View itemView) {
+        public SearchFoodViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
             super(itemView);
 
             foodNameTextView = itemView.findViewById(R.id.addFoodRecycler);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onFoodItemClicked(foodArrayList.get(getAdapterPosition()));
+                }
+            });
+
         }
+    }
+
+    public interface OnItemClickListener {
+        void onFoodItemClicked(String foodName);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        onItemClickListener = listener;
     }
 
 }

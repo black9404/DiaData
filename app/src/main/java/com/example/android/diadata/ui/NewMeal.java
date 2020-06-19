@@ -3,13 +3,12 @@ package com.example.android.diadata.ui;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -19,29 +18,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.android.diadata.MainActivity;
 import com.example.android.diadata.R;
 import com.example.android.diadata.core.SearchFoodAdapter;
-import com.example.android.diadata.db.model.Meal;
-import com.example.android.diadata.db.model.User;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class NewMeal extends Fragment {
 
-    private boolean recyclerViewOpen = false;
-
     private SearchFoodAdapter searchFoodAdapter;
 
     private RecyclerView recyclerView;
+    private ListView listViewAlimentos;
 
-    private ArrayList<String> foodArrayList;
+    private ArrayList<String> foodArrayList, foodArray = new ArrayList<>();
 
-    private TextInputEditText mealNameInputEditText;
     private SearchView searchFoodSearchView;
 
     @Nullable
@@ -61,8 +52,6 @@ public class NewMeal extends Fragment {
     //metodo que instancia todos os elementos presentes no layout
     private void initViews() {
 
-        mealNameInputEditText = Objects.requireNonNull(getView()).findViewById(R.id.userNameForm);
-
         searchFoodSearchView = Objects.requireNonNull(getView()).findViewById(R.id.searchFood);
         searchFoodSearchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchFoodSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -76,8 +65,10 @@ public class NewMeal extends Fragment {
 
                 if (TextUtils.isEmpty(newText)) {
                     recyclerView.setVisibility(View.INVISIBLE);
+                    listViewAlimentos.setVisibility(View.VISIBLE);
                 } else {
                     recyclerView.setVisibility(View.VISIBLE);
+                    listViewAlimentos.setVisibility(View.INVISIBLE);
                     searchFoodAdapter.getFilter().filter(newText);
                 }
 
@@ -86,6 +77,8 @@ public class NewMeal extends Fragment {
         });
 
         recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.recycler_view);
+
+        listViewAlimentos = Objects.requireNonNull(getView()).findViewById(R.id.list_view_alimentos);
 
         Button submitFormButton = Objects.requireNonNull(getView()).findViewById(R.id.button);
         submitFormButton.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +109,12 @@ public class NewMeal extends Fragment {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         searchFoodAdapter = new SearchFoodAdapter(foodArrayList);
+        searchFoodAdapter.setOnItemClickListener(new SearchFoodAdapter.OnItemClickListener() {
+            @Override
+            public void onFoodItemClicked(String foodName) {
+                addDataToArray(foodName);
+            }
+        });
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(searchFoodAdapter);
     }
@@ -124,12 +123,32 @@ public class NewMeal extends Fragment {
     private void searchFoodFromDatabase() {
     }
 
-    //metodo que verifica se os dados introduzidos pelo utilizador são válidos
-    private void checkIfDataIsValid() {
+    //metodo que insere os dados introduzidos na base de dados
+    public void addDataToArray(String foodName) {
+
+        //verifica se o alimento se encontra adicionado
+        if (foodArray.contains(foodName)) {
+            //caso se encontre avisa o utilizador
+            Toast.makeText(getContext(), "O alimento já se encontra adicionado na refeição!", Toast.LENGTH_SHORT).show();
+        }
+
+        //caso contrario adiciona a refeição
+        else {
+            foodArray.add(foodName);
+        }
+
+        //atualiza o adaptar com a lista de alimentos mais recente
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
+                Objects.requireNonNull(getContext()),
+                android.R.layout.simple_list_item_1,
+                foodArray);
+        listViewAlimentos.setAdapter(arrayAdapter);
+
     }
 
-    //metodo que insere os dados introduzidos na base de dados
-    private void addDataToDatabase() {
+    //metodo que obtem os dados do array criado e adiciona na base de dados
+    public void addDataToDatabase(ArrayList<String> foodArray) {
+
     }
 
 }
