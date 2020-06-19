@@ -18,10 +18,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.diadata.MainActivity;
 import com.example.android.diadata.R;
 import com.example.android.diadata.core.SearchFoodAdapter;
+import com.example.android.diadata.db.model.Meal;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class NewMeal extends Fragment {
@@ -120,7 +123,8 @@ public class NewMeal extends Fragment {
     }
 
     //metodo que pesquisa de entre os alimentos todos
-    private void searchFoodFromDatabase() {
+    private List<String> searchFoodFromDatabase() {
+        return MainActivity.diaDataDatabase.foodDao().getNomesAlimento();
     }
 
     //metodo que insere os dados introduzidos na base de dados
@@ -147,8 +151,15 @@ public class NewMeal extends Fragment {
     }
 
     //metodo que obtem os dados do array criado e adiciona na base de dados
-    public void addDataToDatabase(ArrayList<String> foodArray) {
+    public void addDataToDatabase(String nomeRefeicao, ArrayList<String> foodArray) {
+        int idRefeiçao = MainActivity.diaDataDatabase.mealDao().getIdMeal(nomeRefeicao);
 
+        for (int i = 0; i < foodArray.size(); i++){
+            int idAlimento = MainActivity.diaDataDatabase.foodDao().getIdFood(foodArray.get(i));
+            int hidratosAlimento = MainActivity.diaDataDatabase.foodDao().getHidratosAlimento(foodArray.get(i));
+            Meal m = new Meal(idRefeiçao, idAlimento, hidratosAlimento, nomeRefeicao, 20, 30);
+            MainActivity.diaDataDatabase.mealDao().addRefeicao(m);
+        }
     }
 
 }

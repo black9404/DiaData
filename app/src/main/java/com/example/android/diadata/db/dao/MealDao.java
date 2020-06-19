@@ -16,6 +16,9 @@ public interface MealDao {
     @Query("Select * from meal")
     List<Meal> getRefeicoes();
 
+    @Query("Select id_meal from meal WHERE nome_meal = :nome_refeicao")
+    int getIdMeal(String nome_refeicao);
+
     //Vai buscar todos os ingredientes da refeição e executa a soma
     @Query("SELECT SUM(qnt_hidratos) FROM meal WHERE nome_meal = :nome_refeicao")
     int getSomaHidratos(String nome_refeicao);
