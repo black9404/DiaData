@@ -127,7 +127,6 @@ public class NewMeasurement extends Fragment {
     //metodo para adicionar a informação a base de dados
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void addDataToDatabase(String nomeRefeicao, int nivelGlicemia) {
-
         DashData dashData = new DashData(
                 LocalDateTime.now().getDayOfMonth(),
                 LocalDateTime.now().getMonthValue(),

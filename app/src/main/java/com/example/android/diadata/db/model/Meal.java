@@ -8,8 +8,10 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "meal")
 public class Meal {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
+    @ColumnInfo(name = "id_tabela_meal")
+    private int id_tabela_meal;
     @ColumnInfo(name = "nome_meal")
     private String nome;
     @ColumnInfo(name = "id_meal")
@@ -35,6 +37,14 @@ public class Meal {
     @NonNull
     public String getNome() {
         return nome;
+    }
+
+    public int getId_tabela_meal() {
+        return id_tabela_meal;
+    }
+
+    public void setId_tabela_meal(int id_tabela_meal) {
+        this.id_tabela_meal = id_tabela_meal;
     }
 
     public void setNome(@NonNull String nome) {
