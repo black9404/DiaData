@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,15 @@ public class NewFood extends Fragment {
 
     //metodo que instancia todos os elementos presentes no layout
     private void initViews() {
+
+        ImageView backButtonImageView = Objects.requireNonNull(getView()).findViewById(R.id.backButton);
+        backButtonImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStackImmediate();
+            }
+        });
+
         nome = Objects.requireNonNull(getView()).findViewById(R.id.userNameForm);
 
         hidratos = Objects.requireNonNull(getView()).findViewById(R.id.HidratosForm);

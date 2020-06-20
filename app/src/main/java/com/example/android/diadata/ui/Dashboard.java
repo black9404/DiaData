@@ -1,9 +1,6 @@
 package com.example.android.diadata.ui;
 
 import android.annotation.SuppressLint;
-import android.app.Notification;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,8 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -34,7 +29,6 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.android.diadata.core.App.CHANNEL_ID;
 
 public class Dashboard extends Fragment {
 
@@ -117,36 +111,14 @@ public class Dashboard extends Fragment {
                     FabAnimation.showOut(addMealFloatingActionButton);
                     FabAnimation.showOut(addFoodFloatingActionButton);
                 }
-                //testNotifications();
             }
         });
 
     }
 
-    //metodo que acede a todas as notificações enviadas ao utilizador
-    private void testNotifications() {
-
-        Intent intent = new Intent(getContext(), MainActivity.class);
-        intent.putExtra("openFragment", "newDose");
-        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(Objects.requireNonNull(getContext()));
-
-        Notification notification = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
-                .setSmallIcon(R.drawable.app_icon)
-                .setContentTitle("Teste")
-                .setContentText("message")
-                .setContentIntent(pendingIntent)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                .build();
-
-        notificationManager.notify(1, notification);
-
-    }
-
     //metodo que redireciona o utilizador para o perfil
     private void redirectToProfile() {
+        isRotate = false;
         Fragment profile = new Profile();
         FragmentTransaction transaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         transaction.replace(R.id.fragment_container, profile);
@@ -156,6 +128,7 @@ public class Dashboard extends Fragment {
 
     //metodo que redireciona o utilizador para a medição e aplicação de insulina
     private void redirectToMeasurement() {
+        isRotate = false;
         Fragment NewMeasurement = new NewMeasurement();
         FragmentTransaction transaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         transaction.replace(R.id.fragment_container, NewMeasurement);
@@ -165,6 +138,7 @@ public class Dashboard extends Fragment {
 
     //metodo que redireciona o utilizador para adicionar um alimento
     private void redirectToFood() {
+        isRotate = false;
         Fragment newFood = new NewFood();
         FragmentTransaction transaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         transaction.replace(R.id.fragment_container, newFood);
@@ -174,6 +148,7 @@ public class Dashboard extends Fragment {
 
     //metodo que redireciona o utilizador para adicionar uma refeição
     private void redirectToMeal() {
+        isRotate = false;
         Fragment newMeal = new NewMeal();
         FragmentTransaction transaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         transaction.replace(R.id.fragment_container, newMeal);

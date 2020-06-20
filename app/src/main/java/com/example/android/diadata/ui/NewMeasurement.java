@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -59,6 +60,14 @@ public class NewMeasurement extends Fragment {
 
     //metodo que instancia todos os elementos presentes no layout
     private void initViews() {
+
+        ImageView backButtonImageView = Objects.requireNonNull(getView()).findViewById(R.id.backButton);
+        backButtonImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStackImmediate();
+            }
+        });
 
         searchMealSearchView = Objects.requireNonNull(getView()).findViewById(R.id.searchMeal);
         searchMealSearchView.setImeOptions(EditorInfo.IME_ACTION_DONE);

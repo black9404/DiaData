@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -55,6 +56,14 @@ public class NewMeal extends Fragment {
 
     //metodo que instancia todos os elementos presentes no layout
     private void initViews() {
+
+        ImageView backButtonImageView = Objects.requireNonNull(getView()).findViewById(R.id.backButton);
+        backButtonImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStackImmediate();
+            }
+        });
 
         mealTextInputEditText = Objects.requireNonNull(getView()).findViewById(R.id.nomeRefeicao);
 

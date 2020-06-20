@@ -12,6 +12,17 @@ android:orientation="vertical">
     android:layout_height="wrap_content">
 
     <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_arrow_back"
+        android:tint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
         android:id="@+id/imageView2"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -31,7 +42,7 @@ android:orientation="vertical">
         android:text="Adicionar medição"
         android:textSize="40sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/backButton" />
 
     <SearchView
         android:id="@+id/searchMeal"
@@ -80,7 +91,7 @@ android:orientation="vertical">
 
     </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
+    <Button
         android:id="@+id/button_gli"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -88,7 +99,7 @@ android:orientation="vertical">
         android:text="@string/botao_submeter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/apelido" />
+        app:layout_constraintTop_toBottomOf="@+id/niveis_glicemia" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
