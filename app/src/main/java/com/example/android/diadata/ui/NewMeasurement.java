@@ -1,5 +1,7 @@
 package com.example.android.diadata.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -82,10 +84,8 @@ public class NewMeasurement extends Fragment {
 
                 if (TextUtils.isEmpty(newText)) {
                     recyclerView.setVisibility(View.INVISIBLE);
-                    glicemiaTextInputLayout.setVisibility(View.VISIBLE);
                 } else {
                     recyclerView.setVisibility(View.VISIBLE);
-                    glicemiaTextInputLayout.setVisibility(View.INVISIBLE);
                     searchFoodAdapter.getFilter().filter(newText);
                 }
 
@@ -98,16 +98,41 @@ public class NewMeasurement extends Fragment {
         glicemiaTextInputLayout = getView().findViewById(R.id.niveis_glicemia);
 
         valoresGlicemiaForm = Objects.requireNonNull(getView()).findViewById(R.id.valoresGlicemiaForm);
+        valoresGlicemiaForm.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                recyclerView.setVisibility(View.GONE);
+            }
+        });
 
         glicemiaButton = getView().findViewById(R.id.button_gli);
         glicemiaButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                addDataToDatabase(
-                        searchMealSearchView.getQuery().toString(),
-                        Integer.parseInt(valoresGlicemiaForm.getText().toString()));
-                Toast.makeText(getContext(), "Resultado:" + calcularDoseInsulina(searchMealSearchView.getQuery().toString(),Integer.parseInt(valoresGlicemiaForm.getText().toString())), Toast.LENGTH_SHORT).show();
+
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Confirmar")
+                        .setMessage("Confirma os dados da seguinte refeição?\n " +
+                                "Refeição Selecionada: " + searchMealSearchView.getQuery().toString() + "\n" +
+                                "Valores de Glicemia: "+ valoresGlicemiaForm.getText().toString() + "\n" +
+                                "Dose a tomar: " + calcularDoseInsulina(searchMealSearchView.getQuery().toString(),Integer.parseInt(valoresGlicemiaForm.getText().toString())) + " unidades")
+                        .setIcon(R.drawable.ic_confirmation)
+                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                addDataToDatabase(
+                                        searchMealSearchView.getQuery().toString(),
+                                        Integer.parseInt(valoresGlicemiaForm.getText().toString()));
+                                Toast.makeText(getContext(), "Medição adicionada com sucesso!", Toast.LENGTH_SHORT).show();
+                            }})
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getContext(), "Operação cancelada", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .show();
+
             }
         });
     }

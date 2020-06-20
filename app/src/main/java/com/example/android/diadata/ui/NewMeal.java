@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +33,7 @@ import java.util.Objects;
 public class NewMeal extends Fragment {
 
     private SearchFoodAdapter searchFoodAdapter;
+    private ArrayAdapter<String> arrayAdapter;
 
     private RecyclerView recyclerView;
     private ListView listViewAlimentos;
@@ -94,6 +97,22 @@ public class NewMeal extends Fragment {
         recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.recycler_view);
 
         listViewAlimentos = Objects.requireNonNull(getView()).findViewById(R.id.list_view_alimentos);
+        listViewAlimentos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                final TextView selectedFood = view.findViewById(R.id.foodName);
+                ImageView removeFood = view.findViewById(R.id.remove_food);
+
+                removeFood.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        removeDataFromArray((selectedFood).getText().toString());
+                    }
+                });
+
+            }
+        });
 
         Button submitFormButton = Objects.requireNonNull(getView()).findViewById(R.id.button);
         submitFormButton.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +145,7 @@ public class NewMeal extends Fragment {
         foodArrayList = (ArrayList<String>) MainActivity.diaDataDatabase.foodDao().getNomesAlimento();
     }
 
-    //metodo que insere os dados introduzidos na base de dados
+    //metodo que insere os dados introduzidos no array
     public void addDataToArray(String foodName) {
 
         //verifica se o alimento se encontra adicionado
@@ -141,11 +160,33 @@ public class NewMeal extends Fragment {
         }
 
         //atualiza o adaptar com a lista de alimentos mais recente
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
+        arrayAdapter = new ArrayAdapter<>(
                 Objects.requireNonNull(getContext()),
-                android.R.layout.simple_list_item_1,
+                R.layout.added_food_items,
+                R.id.foodName,
                 foodArray);
         listViewAlimentos.setAdapter(arrayAdapter);
+
+        arrayAdapter.notifyDataSetChanged();
+
+    }
+
+    //metodo que remove os dados introduzidos no array
+    public void removeDataFromArray(String foodName) {
+
+        foodArray.remove(foodName);
+
+        //atualiza o adaptar com a lista de alimentos mais recente
+        arrayAdapter = new ArrayAdapter<>(
+                Objects.requireNonNull(getContext()),
+                R.layout.added_food_items,
+                R.id.foodName,
+                foodArray);
+        listViewAlimentos.setAdapter(arrayAdapter);
+
+        arrayAdapter.notifyDataSetChanged();
+
+        Toast.makeText(getContext(), "Alimento removido com sucesso!", Toast.LENGTH_SHORT).show();
 
     }
 
