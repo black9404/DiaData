@@ -78,10 +78,10 @@ public class NewFood extends Fragment {
         //lista de todos os campos presentes no formulário
         List<TextInputEditText> editTextList = Arrays.asList(nome, hidratos);
         List<AutoCompleteTextView> autoCompleteTextViewList = Arrays.asList(tipoAlimento);
-
         //variaveis
         String nome = "";
-        int hidratos = 0, tipoAlimento = 0;
+        double hidratos = 0.0;
+        int tipoAlimento = 0;
 
         //for loop que verifica se todos os campos foram preenchidos
         for (TextInputEditText edit : editTextList) {
@@ -101,7 +101,7 @@ public class NewFood extends Fragment {
                         break;
                     //campo de hidratos
                     case 1:
-                        hidratos = Integer.parseInt(edit.getText().toString());
+                        hidratos = Double.parseDouble(edit.getText().toString());
                         break;
                 }
             }

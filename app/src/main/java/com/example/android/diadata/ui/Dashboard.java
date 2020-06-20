@@ -25,6 +25,8 @@ import com.example.android.diadata.animation.FabAnimation;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -214,7 +216,9 @@ public class Dashboard extends Fragment {
         }else{
             ultimaDoseTextView.setText("Error 404");
         }
-        hidratosTextView.setText(String.format(getResources().getString(R.string.gramas), MainActivity.diaDataDatabase.DashData().getHidratosTotal()));
+
+        NumberFormat hidratosFormater = new DecimalFormat("#0.00");
+        hidratosTextView.setText(String.format(getResources().getString(R.string.gramas), hidratosFormater.format(MainActivity.diaDataDatabase.DashData().getHidratosTotal())));
         unidadesTextView.setText(String.format(getResources().getString(R.string.s_unidade_s), MainActivity.diaDataDatabase.DashData().getDosesTotal()));
 
     }
