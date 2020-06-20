@@ -98,10 +98,9 @@ public class NewMeasurement extends Fragment {
                 addDataToDatabase(
                         searchMealSearchView.getQuery().toString(),
                         Integer.parseInt(valoresGlicemiaForm.getText().toString()));
-                Toast.makeText(getContext(), "Resultado:" + calcularDoseInsulina(Integer.parseInt(valoresGlicemiaForm.getText().toString())), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Resultado:" + calcularDoseInsulina(searchMealSearchView.getQuery().toString(),Integer.parseInt(valoresGlicemiaForm.getText().toString())), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     //metodo que prepara a RecyclerView de procura
@@ -135,12 +134,24 @@ public class NewMeasurement extends Fragment {
                 LocalDateTime.now().getMinute(),
                 MainActivity.diaDataDatabase.mealDao().getIdMeal(nomeRefeicao),
                 MainActivity.diaDataDatabase.mealDao().getSomaHidratos(nomeRefeicao),
-                calcularDoseInsulina(nivelGlicemia));
+                calcularDoseInsulina(nomeRefeicao, nivelGlicemia));
         MainActivity.diaDataDatabase.DashData().addDados(dashData);
     }
-    //Metodo para calcular unidades de dosagem
-    private int calcularDoseInsulina(int glicemia_momento){
-        return (glicemia_momento-150)/30;
-    }
 
+    //Metodo para calcular unidades de dosagem
+    private int calcularDoseInsulina(String nomeRefeicao, int glicemia_momento){
+        double dose = 0;
+        int totalHidratos = MainActivity.diaDataDatabase.mealDao().getSomaHidratos(nomeRefeicao);
+        //Caso os valores de glicemia sejam maiores do que o aconselhado
+        if (glicemia_momento > 120){
+            dose = totalHidratos/10;
+            dose = dose + Math.round(((double)(glicemia_momento-103)/50)); //103 é a mediana do intervalo de valores aconselhado [85-120]
+        //Caso os valores de glicemia sejam inferiores ao aconselhado
+        }else if(glicemia_momento <85) {
+            dose = (((totalHidratos * 5) + glicemia_momento) - 103) / 50;
+        }else{
+            dose = totalHidratos/10;
+        }
+        return (int)Math.round(dose);
+    }
 }
