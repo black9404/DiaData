@@ -41,8 +41,8 @@
 
     <!-- Fragmento dashboard -->
     <string name="welcome_sentence_user">Bem-vindo, %s</string>
-    <string name="profile">Profile</string>
-    <string name="notifications">Notifications</string>
+    <string name="profile">Perfil</string>
+    <string name="notifications">Notificações</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="user_name_and_forename">%s</string>
     <string name="mensagem_bem_vindo">Bem-vindo,</string>
@@ -54,5 +54,8 @@
     <string name="nome">Nome</string>
     <string name="profile_name_info">%s</string>
     <string name="Medicao">Medição</string>
+    <string name="h_s_horas">há %s horas</string>
+    <string name="gramas">%s g</string>
+    <string name="s_unidade_s">%s unidade(s)</string>
 
 </resources>

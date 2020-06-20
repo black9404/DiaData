@@ -57,9 +57,10 @@
                 tools:ignore="ContentDescription,MissingConstraints" />
 
             <TextView
+                android:id="@+id/ultima_dose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="há 3 horas"
+                android:text="@string/h_s_horas"
                 android:textSize="30sp"
                 android:layout_marginEnd="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"

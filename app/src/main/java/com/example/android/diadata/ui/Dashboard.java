@@ -1,5 +1,6 @@
 package com.example.android.diadata.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -36,11 +37,9 @@ public class Dashboard extends Fragment {
 
     boolean isRotate = false;
 
-    private NotificationManagerCompat notificationManager;
-
-    private TextView userNameTextView;
+    private TextView hidratosTextView, ultimaDoseTextView, unidadesTextView;
     private BottomAppBar bottomAppBar;
-    private FloatingActionButton addFloatingActionButton, addMealFloatingActionButton, addFoodFloatingActionButton;
+    private FloatingActionButton addMealFloatingActionButton, addFoodFloatingActionButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,10 +51,17 @@ public class Dashboard extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews();
         loadNotificationsIcon();
+        loadDashboardInformation();
     }
 
     //metodo que instancia todos os elementos presentes no layout
     private void initViews() {
+
+        hidratosTextView = Objects.requireNonNull(getView()).findViewById(R.id.hidratos);
+
+        ultimaDoseTextView = Objects.requireNonNull(getView()).findViewById(R.id.ultima_dose);
+
+        unidadesTextView = Objects.requireNonNull(getView()).findViewById(R.id.unidades);
 
         bottomAppBar = Objects.requireNonNull(getView()).findViewById(R.id.bar);
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -95,7 +101,7 @@ public class Dashboard extends Fragment {
         });
         FabAnimation.init(addFoodFloatingActionButton);
 
-        addFloatingActionButton = Objects.requireNonNull(getView()).findViewById(R.id.fab);
+        FloatingActionButton addFloatingActionButton = Objects.requireNonNull(getView()).findViewById(R.id.fab);
         addFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,22 +113,9 @@ public class Dashboard extends Fragment {
                     FabAnimation.showOut(addMealFloatingActionButton);
                     FabAnimation.showOut(addFoodFloatingActionButton);
                 }
-                testNotifications();
-                //addData();
+                //testNotifications();
             }
         });
-
-    }
-
-    //metodo que redireciona o utilizador para o fragmento de adicionar dados
-    private void addData() {
-
-        //redireciona o utilizador para adicionar novos dados
-        Fragment addNewDataFragment = new Dashboard();
-        FragmentTransaction transaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
-        transaction.replace(R.id.fragment_container, addNewDataFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
 
     }
 
@@ -133,7 +126,7 @@ public class Dashboard extends Fragment {
         intent.putExtra("openFragment", "newDose");
         PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
-        notificationManager = NotificationManagerCompat.from(Objects.requireNonNull(getContext()));
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(Objects.requireNonNull(getContext()));
 
         Notification notification = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
                 .setSmallIcon(R.drawable.app_icon)
@@ -232,4 +225,15 @@ public class Dashboard extends Fragment {
         }
 
     }
+
+    //metodo que carrega toda a informação do dashboard
+    @SuppressLint("StringFormatMatches")
+    private void loadDashboardInformation() {
+
+        hidratosTextView.setText(String.format(getResources().getString(R.string.gramas), MainActivity.diaDataDatabase.DashData().getHidratosTotal()));
+        ultimaDoseTextView.setText(String.format(getResources().getString(R.string.h_s_horas), MainActivity.diaDataDatabase.DashData().getUltimaDose()));
+        unidadesTextView.setText(String.format(getResources().getString(R.string.s_unidade_s), MainActivity.diaDataDatabase.DashData().getDosesTotal()));
+
+    }
+
 }

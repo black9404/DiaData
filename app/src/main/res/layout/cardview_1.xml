@@ -57,11 +57,12 @@
                 tools:ignore="ContentDescription,MissingConstraints" />
 
             <TextView
+                android:id="@+id/hidratos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:textSize="30sp"
-                android:text="1200 g"
+                android:text="@string/gramas"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textSubtitleDashboard1" />

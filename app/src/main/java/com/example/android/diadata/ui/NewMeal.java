@@ -47,7 +47,7 @@ public class NewMeal extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        fetchFoodFromDatabaseToArray();
+        searchFoodFromDatabase();
         initViews();
         setUpRecyclerView();
     }
@@ -123,8 +123,8 @@ public class NewMeal extends Fragment {
     }
 
     //metodo que pesquisa de entre os alimentos todos
-    private List<String> searchFoodFromDatabase() {
-        return MainActivity.diaDataDatabase.foodDao().getNomesAlimento();
+    private void searchFoodFromDatabase() {
+        foodArrayList = (ArrayList<String>) MainActivity.diaDataDatabase.foodDao().getNomesAlimento();
     }
 
     //metodo que insere os dados introduzidos na base de dados
