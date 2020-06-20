@@ -22,9 +22,9 @@ import com.example.android.diadata.MainActivity;
 import com.example.android.diadata.R;
 import com.example.android.diadata.core.SearchFoodAdapter;
 import com.example.android.diadata.db.model.Meal;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class NewMeal extends Fragment {
@@ -37,6 +37,7 @@ public class NewMeal extends Fragment {
     private ArrayList<String> foodArrayList, foodArray = new ArrayList<>();
 
     private SearchView searchFoodSearchView;
+    private TextInputEditText mealTextInputEditText;
 
     @Nullable
     @Override
@@ -54,6 +55,8 @@ public class NewMeal extends Fragment {
 
     //metodo que instancia todos os elementos presentes no layout
     private void initViews() {
+
+        mealTextInputEditText = Objects.requireNonNull(getView()).findViewById(R.id.nomeRefeicao);
 
         searchFoodSearchView = Objects.requireNonNull(getView()).findViewById(R.id.searchFood);
         searchFoodSearchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -87,23 +90,10 @@ public class NewMeal extends Fragment {
         submitFormButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                addDataToDatabase(Objects.requireNonNull(mealTextInputEditText.getText()).toString(), foodArray);
+                Toast.makeText(getContext(), "Refeição adicionada com sucesso!", Toast.LENGTH_SHORT).show();
             }
         });
-
-    }
-
-    //metodo que retorna todos os alimentos da base de dados e os adiciona num arraylist
-    private void fetchFoodFromDatabaseToArray() {
-
-        //instancia uma arraylist
-        foodArrayList = new ArrayList<>();
-
-        foodArrayList.add("teste");
-        foodArrayList.add("ola");
-        foodArrayList.add("ola1");
-        foodArrayList.add("ola3");
-        foodArrayList.add("ola4");
 
     }
 
@@ -152,12 +142,12 @@ public class NewMeal extends Fragment {
 
     //metodo que obtem os dados do array criado e adiciona na base de dados
     public void addDataToDatabase(String nomeRefeicao, ArrayList<String> foodArray) {
-        int idRefeiçao = MainActivity.diaDataDatabase.mealDao().getIdMeal(nomeRefeicao);
+        int idRefeicao = MainActivity.diaDataDatabase.mealDao().getIdMeal(nomeRefeicao);
 
         for (int i = 0; i < foodArray.size(); i++){
             int idAlimento = MainActivity.diaDataDatabase.foodDao().getIdFood(foodArray.get(i));
             int hidratosAlimento = MainActivity.diaDataDatabase.foodDao().getHidratosAlimento(foodArray.get(i));
-            Meal m = new Meal(idRefeiçao, idAlimento, hidratosAlimento, nomeRefeicao, 20, 30);
+            Meal m = new Meal(idRefeicao, idAlimento, hidratosAlimento, nomeRefeicao, 20, 30);
             MainActivity.diaDataDatabase.mealDao().addRefeicao(m);
         }
     }

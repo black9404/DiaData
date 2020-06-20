@@ -13,8 +13,8 @@ import java.util.List;
 @Dao
 public interface MealDao {
 
-    @Query("Select * from meal")
-    List<Meal> getRefeicoes();
+    @Query("SELECT DISTINCT nome_meal FROM meal")
+    List<String> getRefeicoes();
 
     @Query("Select id_meal from meal WHERE nome_meal = :nome_refeicao")
     int getIdMeal(String nome_refeicao);

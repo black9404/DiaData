@@ -24,22 +24,18 @@ public class DashData {
     private int minutos;
     @ColumnInfo(name = "id_meal")
     private int id_meal;
-    @ColumnInfo(name = "id_food")
-    private int id_alimento;
     @ColumnInfo(name = "hidratos")
     private int hidratos;
     @ColumnInfo(name = "dose")
     private int dose;
 
-
-    public DashData(int dia, int mes, int ano, int hora, int minutos, int id_meal, int id_alimento, int hidratos, int dose) {
+    public DashData(int dia, int mes, int ano, int hora, int minutos, int id_meal, int hidratos, int dose) {
         this.dia = dia;
         this.mes = mes;
         this.ano = ano;
         this.hora = hora;
         this.minutos = minutos;
         this.id_meal = id_meal;
-        this.id_alimento = id_alimento;
         this.hidratos = hidratos;
         this.dose = dose;
     }
@@ -98,14 +94,6 @@ public class DashData {
 
     public void setId_meal(int id_meal) {
         this.id_meal = id_meal;
-    }
-
-    public int getId_alimento() {
-        return id_alimento;
-    }
-
-    public void setId_alimento(int id_alimento) {
-        this.id_alimento = id_alimento;
     }
 
     public int getHidratos() {
