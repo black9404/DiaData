@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,7 +22,7 @@ import com.example.android.diadata.MainActivity;
 import com.example.android.diadata.R;
 import com.example.android.diadata.core.SearchFoodAdapter;
 import com.example.android.diadata.db.model.DashData;
-import com.example.android.diadata.db.model.Meal;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.LocalDateTime;
@@ -35,6 +36,8 @@ public class NewMeasurement extends Fragment {
     private SearchView searchMealSearchView;
     private ArrayList<String> mealArrayList;
     private TextInputLayout glicemiaTextInputLayout;
+
+    private TextInputEditText valoresGlicemiaForm;
 
     private Button glicemiaButton;
 
@@ -85,6 +88,8 @@ public class NewMeasurement extends Fragment {
 
         glicemiaTextInputLayout = getView().findViewById(R.id.niveis_glicemia);
 
+        valoresGlicemiaForm = Objects.requireNonNull(getView()).findViewById(R.id.valoresGlicemiaForm);
+
         glicemiaButton = getView().findViewById(R.id.button_gli);
         glicemiaButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -92,7 +97,8 @@ public class NewMeasurement extends Fragment {
             public void onClick(View v) {
                 addDataToDatabase(
                         searchMealSearchView.getQuery().toString(),
-                        Integer.parseInt(String.valueOf(Objects.requireNonNull(glicemiaTextInputLayout.getEditText()).getText())));
+                        Integer.parseInt(valoresGlicemiaForm.getText().toString()));
+                Toast.makeText(getContext(), "Resultado:" + calcularDoseInsulina(Integer.parseInt(valoresGlicemiaForm.getText().toString())), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -124,15 +130,18 @@ public class NewMeasurement extends Fragment {
 
         DashData dashData = new DashData(
                 LocalDateTime.now().getDayOfMonth(),
-                LocalDateTime.now().getMonth(),
+                LocalDateTime.now().getMonthValue(),
                 LocalDateTime.now().getYear(),
                 LocalDateTime.now().getHour(),
                 LocalDateTime.now().getMinute(),
                 MainActivity.diaDataDatabase.mealDao().getIdMeal(nomeRefeicao),
                 MainActivity.diaDataDatabase.mealDao().getSomaHidratos(nomeRefeicao),
-                );
-
-
+                calcularDoseInsulina(nivelGlicemia));
+        MainActivity.diaDataDatabase.DashData().addDados(dashData);
+    }
+    //Metodo para calcular unidades de dosagem
+    private int calcularDoseInsulina(int glicemia_momento){
+        return (glicemia_momento-150)/30;
     }
 
 }

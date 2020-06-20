@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setNotificationTime();
-        defineTimeNotification();
 
         diaDataDatabase = Room.databaseBuilder(getApplicationContext(), DiaDataDatabase.class, "DiaDataDatabase").allowMainThreadQueries().build();
 
@@ -54,54 +53,17 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("horarios", MODE_PRIVATE);
         Calendar calendar = Calendar.getInstance();
 
-        for(int f=1; f < 5; f++) {
+
             Intent intent = new Intent(getApplicationContext(), Notification_reciever.class);
             intent.setAction("notification_time");
-            PendingIntent intentP = PendingIntent.getBroadcast(getApplicationContext(), f, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent intentP = PendingIntent.getBroadcast(getApplicationContext(), 5, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            calendar.set(Calendar.HOUR_OF_DAY, sp.getInt("H"+f,-1));
-            calendar.set(Calendar.MINUTE, sp.getInt("M"+f,-1));
-            calendar.set(Calendar.SECOND, sp.getInt("S"+f,-1));
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 39);
+            calendar.set(Calendar.SECOND, 0);
 
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, intentP);
-        }
-
-        /*//Intent
-        Intent intentNot = new Intent(getApplicationContext(), Notification_reciever.class);
-        intentNot.setAction("notification_time");
-        PendingIntent pendingIntentNot = PendingIntent.getBroadcast(getApplicationContext(), 69, intentNot, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        //Cria a notificação todos os dias de acordo com o calendario acima definido
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntentNot);*/
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), intentP);
     }
-
-    //Definição dos Horários
-    private void defineTimeNotification(){
-        SharedPreferences sp = getSharedPreferences("horarios", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        //Horário 1
-        editor.putInt("H1", 7);
-        editor.putInt("M1", 0);
-        editor.putInt("S1", 0);
-        //Horário 2
-        editor.putInt("H2", 10);
-        editor.putInt("M2", 0);
-        editor.putInt("S2", 0);
-        //Horário 3
-        editor.putInt("H3", 13);
-        editor.putInt("M3", 0);
-        editor.putInt("S3", 0);
-        //Horário 4
-        editor.putInt("H4", 16);
-        editor.putInt("M4", 0);
-        editor.putInt("S4", 0);
-        //Horário 5
-        editor.putInt("H5", 19);
-        editor.putInt("M5", 24);
-        editor.putInt("S5", 0);
-        editor.apply();
-    }
-
 }
+
