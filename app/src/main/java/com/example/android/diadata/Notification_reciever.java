@@ -41,7 +41,7 @@ public class Notification_reciever extends BroadcastReceiver {
             notificationManager.notify(5, builder.build());
             Log.i("Notify", "Alarm Starts"); //Debugging
         }
-    }
         aux = true;
+    }
     }
 }

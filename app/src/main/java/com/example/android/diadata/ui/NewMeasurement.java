@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.diadata.MainActivity;
 import com.example.android.diadata.R;
 import com.example.android.diadata.core.SearchFoodAdapter;
+import com.example.android.diadata.core.SearchMealAdapter;
 import com.example.android.diadata.db.model.DashData;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -34,7 +35,7 @@ import java.util.Objects;
 
 public class NewMeasurement extends Fragment {
 
-    private SearchFoodAdapter searchFoodAdapter;
+    private SearchMealAdapter searchFoodAdapter;
 
     private SearchView searchMealSearchView;
     private ArrayList<String> mealArrayList;
@@ -141,8 +142,8 @@ public class NewMeasurement extends Fragment {
     private void setUpRecyclerView() {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        searchFoodAdapter = new SearchFoodAdapter(mealArrayList);
-        searchFoodAdapter.setOnItemClickListener(new SearchFoodAdapter.OnItemClickListener() {
+        searchFoodAdapter = new SearchMealAdapter(mealArrayList);
+        searchFoodAdapter.setOnItemClickListener(new SearchMealAdapter.OnItemClickListener() {
             @Override
             public void onFoodItemClicked(String foodName) {
                 searchMealSearchView.setQuery(foodName, false);
@@ -177,12 +178,14 @@ public class NewMeasurement extends Fragment {
         double dose = 0;
         double totalHidratos = MainActivity.diaDataDatabase.mealDao().getSomaHidratos(nomeRefeicao);
         //Caso os valores de glicemia sejam maiores do que o aconselhado
-        if (glicemia_momento > 120){
-            dose = totalHidratos/10;
-            dose = dose + Math.round(((double)(glicemia_momento-103)/50)); //103 é a mediana do intervalo de valores aconselhado [85-120]
+        if (glicemia_momento < 120 && glicemia_momento > 85) {
+            dose = totalHidratos / 10;
+            dose = dose + Math.round(((double) (glicemia_momento - 103) / 50));//103 é a mediana do intervalo de valores aconselhado [85-120]
+        }else if (glicemia_momento > 120){
+            dose = (((totalHidratos * 5) + glicemia_momento) - 85) / 50; //4.5 Fator de Bolus Correção utilizado
         //Caso os valores de glicemia sejam inferiores ao aconselhado
-        }else if(glicemia_momento <85) {
-            dose = (((totalHidratos * 5) + glicemia_momento) - 103) / 50;
+        }else if(glicemia_momento < 85) {
+            dose = (((totalHidratos * 5) + glicemia_momento) - 120) / 50; //4.5 Fator de Bolus Correção utilizado
         }else{
             dose = totalHidratos/10;
         }
