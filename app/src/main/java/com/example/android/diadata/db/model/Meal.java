@@ -19,13 +19,13 @@ public class Meal {
     @ColumnInfo(name = "id_alimento")
     private int id_alimento;
     @ColumnInfo(name = "qnt_hidratos")
-    private int hidratos;
+    private double hidratos;
     @ColumnInfo(name = "dia_meal")
     private int dia;
     @ColumnInfo(name = "mes_meal")
     private int mes;
 
-    public Meal(int id_meal, int id_alimento, int hidratos, String nome, int dia, int mes) {
+    public Meal(int id_meal, int id_alimento, double hidratos, String nome, int dia, int mes) {
         this.id_meal = id_meal;
         this.id_alimento = id_alimento;
         this.hidratos = hidratos;
@@ -67,7 +67,7 @@ public class Meal {
         this.id_alimento = id_alimento;
     }
 
-    public int getHidratos() {
+    public double getHidratos() {
         return hidratos;
     }
 

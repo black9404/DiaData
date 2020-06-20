@@ -27,18 +27,6 @@
         <item>Outro</item>
     </string-array>
 
-    <!-- Lista de tipos de Alimento -->
-    <string-array name="food_type">
-        <item>Carboidratos</item>
-        <item>Verduras e Legumes</item>
-        <item>Frutas</item>
-        <item>Leite e derivados</item>
-        <item>Carnes e Ovos</item>
-        <item>Leguminosas e Oleaginosas</item>
-        <item>Óleos e Gurduras</item>
-        <item>Açucares e Doces</item>
-    </string-array>
-
     <!-- Fragmento dashboard -->
     <string name="welcome_sentence_user">Bem-vindo, %s</string>
     <string name="profile">Perfil</string>
@@ -57,5 +45,86 @@
     <string name="h_s_horas">há %s horas</string>
     <string name="gramas">%s g</string>
     <string name="s_unidade_s">%s unidade(s)</string>
+
+    <string-array name="food_nome">
+        <item>Leite</item>
+        <item>Iogurte</item>
+        <item>Queijo</item>
+        <item>Fiambre</item>
+        <item>Peixe</item>
+        <item>Coelho</item>
+        <item>Pão</item>
+        <item>Bolacha Maria</item>
+        <item>Couve Galega</item>
+        <item>Ovo</item>
+        <item>Arroz</item>
+        <item>Esparguete</item>
+        <item>Noz</item>
+        <item>Alface</item>
+        <item>Batata</item>
+        <item>Laranja</item>
+        <item>Maça</item>
+        <item>Uva</item>
+        <item>Amêndoa</item>
+        <item>Amendoim</item>
+    </string-array>
+
+    <string-array name="food_hidratos">
+        <item>4.6</item>
+        <item>4.3</item>
+        <item>1.5</item>
+        <item>0.5</item>
+        <item>0</item>
+        <item>0.5</item>
+        <item>59.9</item>
+        <item>82.6</item>
+        <item>2.3</item>
+        <item>0.6</item>
+        <item>78.1</item>
+        <item>79.6</item>
+        <item>5</item>
+        <item>0.2</item>
+        <item>20</item>
+        <item>10.2</item>
+        <item>13</item>
+        <item>22</item>
+        <item>7.5</item>
+        <item>8.5</item>
+    </string-array>
+
+    <string-array name="food_int_type">
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>1</item>
+        <item>1</item>
+        <item>2</item>
+        <item>5</item>
+        <item>1</item>
+        <item>1</item>
+        <item>6</item>
+        <item>2</item>
+        <item>1</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>6</item>
+        <item>6</item>
+    </string-array>
+
+    <!-- Lista de tipos de Alimento -->
+    <string-array name="food_type">
+        <item>Carboidratos</item>
+        <item>Verduras e Legumes</item>
+        <item>Frutas</item>
+        <item>Leite e derivados</item>
+        <item>Carnes e Ovos</item>
+        <item>Leguminosas e Oleaginosas</item>
+        <item>Óleos e Gurduras</item>
+        <item>Açucares e Doces</item>
+    </string-array>
 
 </resources>

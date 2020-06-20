@@ -25,11 +25,11 @@ public class DashData {
     @ColumnInfo(name = "id_meal")
     private int id_meal;
     @ColumnInfo(name = "hidratos")
-    private int hidratos;
+    private double hidratos;
     @ColumnInfo(name = "dose")
     private int dose;
 
-    public DashData(int dia, int mes, int ano, int hora, int minutos, int id_meal, int hidratos, int dose) {
+    public DashData(int dia, int mes, int ano, int hora, int minutos, int id_meal, double hidratos, int dose) {
         this.dia = dia;
         this.mes = mes;
         this.ano = ano;
@@ -96,7 +96,7 @@ public class DashData {
         this.id_meal = id_meal;
     }
 
-    public int getHidratos() {
+    public double getHidratos() {
         return hidratos;
     }
 

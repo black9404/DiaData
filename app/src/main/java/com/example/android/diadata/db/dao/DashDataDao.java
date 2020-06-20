@@ -14,10 +14,13 @@ import java.util.List;
 public interface DashDataDao {
 
     @Query("SELECT SUM(hidratos) from dashdata")
-    int getHidratosTotal();
+    double getHidratosTotal();
 
     @Query("SELECT hora_info FROM DashData WHERE id_info = (SELECT MAX(id_info) FROM DashData)")
     int getUltimaDose();
+
+    @Query("SELECT dia_info FROM DashData WHERE id_info = (SELECT MAX(id_info) FROM DashData)")
+    int getUltimaDoseDia();
 
     @Query("SELECT SUM(dose) from dashdata")
     int getDosesTotal();

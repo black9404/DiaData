@@ -12,11 +12,11 @@ public class Food {
     @ColumnInfo(name = "nome")
     private String food_name;
     @ColumnInfo(name = "hidratos")
-    private int hidratos;
+    private double hidratos;
     @ColumnInfo(name = "tipo_alimento")
     private int t_alimento;
 
-    public Food(String food_name, int hidratos, int t_alimento) {
+    public Food(String food_name, double hidratos, int t_alimento) {
         this.food_name = food_name;
         this.hidratos = hidratos;
         this.t_alimento = t_alimento;
@@ -38,7 +38,7 @@ public class Food {
         this.food_name = food_name;
     }
 
-    public int getHidratos() {
+    public double getHidratos() {
         return hidratos;
     }
 

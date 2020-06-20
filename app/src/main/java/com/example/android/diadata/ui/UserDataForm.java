@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.android.diadata.MainActivity;
 import com.example.android.diadata.R;
+import com.example.android.diadata.db.model.Food;
 import com.example.android.diadata.db.model.User;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -65,6 +66,7 @@ public class UserDataForm extends Fragment {
         submitFormButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                popularBDD();
                 redirectToDashboard(checkIfDataIsValid());
             }
         });
@@ -196,6 +198,17 @@ public class UserDataForm extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("userDataAdded", true);
         editor.apply();
+    }
+
+    //metodo para popular a base de dados
+    private void popularBDD(){
+        String[] foodName = getResources().getStringArray(R.array.food_nome);
+        String[] foodHidratos = getResources().getStringArray(R.array.food_hidratos);
+        String[] foodTipoAlimento = getResources().getStringArray(R.array.food_int_type);
+        for (int i = 0; i < getResources().getStringArray(R.array.food_int_type).length; i++){
+            Food f = new Food(foodName[i], Double.parseDouble(foodHidratos[i]), Integer.parseInt(foodTipoAlimento[i]));
+            MainActivity.diaDataDatabase.foodDao().addAlimento(f);
+        }
     }
 
 }

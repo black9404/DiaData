@@ -157,7 +157,7 @@ public class NewMeal extends Fragment {
 
         for (int i = 0; i < foodArray.size(); i++){
             int idAlimento = MainActivity.diaDataDatabase.foodDao().getIdFood(foodArray.get(i));
-            int hidratosAlimento = MainActivity.diaDataDatabase.foodDao().getHidratosAlimento(foodArray.get(i));
+            double hidratosAlimento = MainActivity.diaDataDatabase.foodDao().getHidratosAlimento(foodArray.get(i));
             Meal m = new Meal(idRefeicao, idAlimento, hidratosAlimento, nomeRefeicao, 20, 30);
             MainActivity.diaDataDatabase.mealDao().addRefeicao(m);
         }

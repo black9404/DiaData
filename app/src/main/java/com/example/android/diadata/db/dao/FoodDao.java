@@ -18,7 +18,7 @@ public interface FoodDao {
 
     //Buscar Hidratos
     @Query("SELECT hidratos from food WHERE nome = :nome_alimento")
-    int getHidratosAlimento(String nome_alimento);
+    double getHidratosAlimento(String nome_alimento);
 
     //Buscar todos os alimentos
     @Query("SELECT DISTINCT nome FROM food")
@@ -29,8 +29,8 @@ public interface FoodDao {
     int getIdFood(String nome_alimento);
 
     //Buscar todos os tipos de alimentos existentes
-    @Query("SELECT tipo_alimento FROM food")
-    int getTipoAlimento();
+    @Query("SELECT tipo_alimento FROM food WHERE nome =:nome_alimento")
+    int getTipoAlimento(String nome_alimento);
 
     //Buscar todos os alimentos correspondestes ao tipo selecionado
     @Query("SELECT nome from food WHERE tipo_alimento = :t_alimento")

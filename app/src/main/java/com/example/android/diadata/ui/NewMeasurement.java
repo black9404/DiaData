@@ -150,7 +150,7 @@ public class NewMeasurement extends Fragment {
     //Metodo para calcular unidades de dosagem
     private int calcularDoseInsulina(String nomeRefeicao, int glicemia_momento){
         double dose = 0;
-        int totalHidratos = MainActivity.diaDataDatabase.mealDao().getSomaHidratos(nomeRefeicao);
+        double totalHidratos = MainActivity.diaDataDatabase.mealDao().getSomaHidratos(nomeRefeicao);
         //Caso os valores de glicemia sejam maiores do que o aconselhado
         if (glicemia_momento > 120){
             dose = totalHidratos/10;

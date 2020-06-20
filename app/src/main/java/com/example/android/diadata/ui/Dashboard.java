@@ -163,25 +163,19 @@ public class Dashboard extends Fragment {
         boolean notificationStatus = sharedPreferences.getBoolean("notificationStatus", false);
 
         if (notificationStatus) {
-
             //alterado o icon
             item.setIcon(getContext().getDrawable(R.drawable.ic_notifications_active));
-
             //mostrada imagem ao utilizador uma mensagem a informar a ação
             Toast.makeText(getContext(), "As notificações da aplicação foram reativadas", Toast.LENGTH_SHORT).show();
-
             //atualizadas as SharedPreferences
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("notificationStatus", false);
             editor.apply();
         } else {
-
             //alterado o icon
             item.setIcon(getContext().getDrawable(R.drawable.ic_notifications_inactive));
-
             //mostrada imagem ao utilizador uma mensagem a informar a ação
             Toast.makeText(getContext(), "As notificações da aplicação foram desativadas durante 8 horas", Toast.LENGTH_SHORT).show();
-
             //atualizadas as SharedPreferences
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("notificationStatus", true);
@@ -209,9 +203,18 @@ public class Dashboard extends Fragment {
     @SuppressLint("StringFormatMatches")
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void loadDashboardInformation() {
-
+        //Caso tenha calculado a dosagem no mesmo dia
+        if (LocalDateTime.now().getDayOfMonth() == MainActivity.diaDataDatabase.DashData().getUltimaDoseDia()) {
+            ultimaDoseTextView.setText(String.format(getResources().getString(R.string.h_s_horas), String.valueOf(LocalDateTime.now().getHour() - MainActivity.diaDataDatabase.DashData().getUltimaDose())));
+        //Caso haja mudança de mes
+        }else if(LocalDateTime.now().getDayOfMonth() < MainActivity.diaDataDatabase.DashData().getUltimaDoseDia()){
+            ultimaDoseTextView.setText(String.format(getResources().getString(R.string.h_s_horas), String.valueOf(LocalDateTime.now().getHour()*24)));
+        }else if (MainActivity.diaDataDatabase.DashData().getUltimaDoseDia() == 0){ //Caso nunca tenha feito um calculo de dosagem
+            ultimaDoseTextView.setText("Sem Dados");
+        }else{
+            ultimaDoseTextView.setText("Error 404");
+        }
         hidratosTextView.setText(String.format(getResources().getString(R.string.gramas), MainActivity.diaDataDatabase.DashData().getHidratosTotal()));
-        ultimaDoseTextView.setText(String.format(getResources().getString(R.string.h_s_horas), LocalDateTime.now().getHour() - MainActivity.diaDataDatabase.DashData().getUltimaDose()));
         unidadesTextView.setText(String.format(getResources().getString(R.string.s_unidade_s), MainActivity.diaDataDatabase.DashData().getDosesTotal()));
 
     }

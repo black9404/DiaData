@@ -21,7 +21,7 @@ public interface MealDao {
 
     //Vai buscar todos os ingredientes da refeição e executa a soma
     @Query("SELECT SUM(qnt_hidratos) FROM meal WHERE nome_meal = :nome_refeicao")
-    int getSomaHidratos(String nome_refeicao);
+    double getSomaHidratos(String nome_refeicao);
 
     @Insert
     void addRefeicao(Meal meal);
