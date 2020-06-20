@@ -1,5 +1,7 @@
 package com.example.android.diadata.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -104,10 +106,29 @@ public class NewMeasurement extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                addDataToDatabase(
-                        searchMealSearchView.getQuery().toString(),
-                        Integer.parseInt(valoresGlicemiaForm.getText().toString()));
-                Toast.makeText(getContext(), "Resultado:" + calcularDoseInsulina(searchMealSearchView.getQuery().toString(),Integer.parseInt(valoresGlicemiaForm.getText().toString())), Toast.LENGTH_SHORT).show();
+
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Confirmar")
+                        .setMessage("Confirma os dados da seguinte refeição?\n " +
+                                "Refeição Selecionada: " + searchMealSearchView.getQuery().toString() + "\n" +
+                                "Valores de Glicemia: "+ valoresGlicemiaForm.getText().toString() + "\n" +
+                                "Dose a tomar: " + calcularDoseInsulina(searchMealSearchView.getQuery().toString(),Integer.parseInt(valoresGlicemiaForm.getText().toString())) + " unidades")
+                        .setIcon(R.drawable.ic_confirmation)
+                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                addDataToDatabase(
+                                        searchMealSearchView.getQuery().toString(),
+                                        Integer.parseInt(valoresGlicemiaForm.getText().toString()));
+                                Toast.makeText(getContext(), "Medição adicionada com sucesso!", Toast.LENGTH_SHORT).show();
+                            }})
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getContext(), "Operação cancelada", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .show();
+
             }
         });
     }
