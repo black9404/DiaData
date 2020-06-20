@@ -95,10 +95,9 @@
         <ListView
             android:id="@+id/list_view_alimentos"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="300dp"
             android:layout_margin="20dp"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchFood" />
@@ -109,9 +108,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:text="@string/botao_submeter"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recycler_view" />
+            app:layout_constraintTop_toBottomOf="@+id/list_view_alimentos" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

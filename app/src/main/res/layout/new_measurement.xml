@@ -62,7 +62,7 @@ android:orientation="vertical">
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchMeal" />
@@ -78,7 +78,7 @@ android:orientation="vertical">
         app:counterMaxLength="12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchMeal">
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view_meal">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/valoresGlicemiaForm"

@@ -84,10 +84,8 @@ public class NewMeasurement extends Fragment {
 
                 if (TextUtils.isEmpty(newText)) {
                     recyclerView.setVisibility(View.INVISIBLE);
-                    glicemiaTextInputLayout.setVisibility(View.VISIBLE);
                 } else {
                     recyclerView.setVisibility(View.VISIBLE);
-                    glicemiaTextInputLayout.setVisibility(View.INVISIBLE);
                     searchFoodAdapter.getFilter().filter(newText);
                 }
 
@@ -100,6 +98,12 @@ public class NewMeasurement extends Fragment {
         glicemiaTextInputLayout = getView().findViewById(R.id.niveis_glicemia);
 
         valoresGlicemiaForm = Objects.requireNonNull(getView()).findViewById(R.id.valoresGlicemiaForm);
+        valoresGlicemiaForm.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                recyclerView.setVisibility(View.GONE);
+            }
+        });
 
         glicemiaButton = getView().findViewById(R.id.button_gli);
         glicemiaButton.setOnClickListener(new View.OnClickListener() {
